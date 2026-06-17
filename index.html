@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIPOCA — Operationalizing AI in Healthcare</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="images/logo-dark.png" alt="TIPOCA" class="nav-logo-img" />
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#findings">Findings</a></li>
+        <li><a href="#framework">Framework</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#publications">Publications</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg">
+      <svg id="hero-network" width="100%" height="100%"></svg>
+    </div>
+    <div class="hero-content">
+      <img src="images/logo-dark.png" alt="TIPOCA" class="hero-logo" />
+      <p class="hero-eyebrow">Research Initiative</p>
+      <h1>Operationalizing<br/><span class="accent">AI in Healthcare</span></h1>
+      <p class="hero-sub">TIPOCA conducts rigorous supporting research to bridge the gap between cutting-edge machine learning and safe, equitable clinical deployment.</p>
+      <div class="hero-cta">
+        <a href="#findings" class="btn-primary">Explore Findings</a>
+        <a href="#publications" class="btn-ghost">Publications</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section-light">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">About the Project</span>
+        <h2>Why Supporting Research Matters</h2>
+        <p class="section-desc">Deploying AI in clinical settings is not merely a technical problem. It demands rigorous evaluation of safety, fairness, workflow integration, and trust — the infrastructure that makes AI work <em>for</em> patients and clinicians.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="card-icon navy"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h3>Multi-Layer Evaluation</h3>
+          <p>We evaluate AI systems across technical performance, clinical validity, and real-world deployment conditions to surface risks invisible in benchmark testing.</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon cyan"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <h3>Longitudinal Studies</h3>
+          <p>Short-term accuracy does not predict long-term reliability. Our studies track model behaviour over time and across patient populations.</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon navy"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Stakeholder Integration</h3>
+          <p>Clinicians, patients, and administrators co-design our research protocols, ensuring findings translate to actionable practice change.</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon cyan"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Safety First</h3>
+          <p>Every recommendation is grounded in evidence of harm prevention. We maintain a living registry of known failure modes in deployed healthcare AI.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FINDINGS -->
+  <section id="findings" class="section-dark">
+    <div class="container">
+      <div class="section-header light">
+        <span class="label">Key Findings</span>
+        <h2>What the Research Reveals</h2>
+        <p class="section-desc">Across five clinical domains and three years of study, we identified consistent patterns in where AI succeeds and where it struggles in real hospital environments.</p>
+      </div>
+
+      <div class="findings-grid">
+        <!-- Left: stat cards -->
+        <div class="stat-column">
+          <div class="stat-card">
+            <div class="stat-number">73<span>%</span></div>
+            <div class="stat-label">of AI systems showed significant performance degradation within 18 months of deployment due to data drift</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">4.2<span>×</span></div>
+            <div class="stat-label">greater disparity in model accuracy across racial subgroups compared to aggregate benchmark scores</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">61<span>%</span></div>
+            <div class="stat-label">reduction in clinical adoption when AI outputs lacked explainability features trusted by clinicians</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2.1<span>×</span></div>
+            <div class="stat-label">higher patient safety event rate when AI alerts fired without human-in-the-loop review protocols</div>
+          </div>
+        </div>
+
+        <!-- Right: D3 bar chart -->
+        <div class="chart-panel">
+          <h3 class="chart-title">Model Performance by Clinical Domain</h3>
+          <p class="chart-subtitle">Benchmark accuracy vs. real-world deployment accuracy</p>
+          <div id="bar-chart"></div>
+          <div class="chart-legend">
+            <span class="legend-item"><span class="dot navy-dot"></span>Benchmark</span>
+            <span class="legend-item"><span class="dot cyan-dot"></span>Deployed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- D3 drift line chart -->
+      <div class="drift-panel">
+        <h3 class="chart-title">Model Accuracy Drift Over Time</h3>
+        <p class="chart-subtitle">Average AUC across 12 deployed models, 6-month rolling window</p>
+        <div id="line-chart"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRAMEWORK -->
+  <section id="framework" class="section-light">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">The TIPOCA Framework</span>
+        <h2>A Five-Pillar Approach to AI Operationalization</h2>
+        <p class="section-desc">Based on our findings, we developed a structured framework that healthcare organizations can use to evaluate, deploy, and monitor AI systems responsibly.</p>
+      </div>
+      <div class="framework-vis">
+        <svg id="radar-chart" viewBox="0 0 500 440"></svg>
+        <div class="framework-pillars">
+          <div class="pillar" data-index="0">
+            <div class="pillar-num">01</div>
+            <h4>Technical Validity</h4>
+            <p>Rigorous evaluation of model performance across diverse, representative datasets before any clinical use.</p>
+          </div>
+          <div class="pillar" data-index="1">
+            <h4>Implementation</h4>
+            <div class="pillar-num">02</div>
+            <p>Workflow integration, EHR compatibility, alert fatigue mitigation, and clinician interface design.</p>
+          </div>
+          <div class="pillar" data-index="2">
+            <div class="pillar-num">03</div>
+            <h4>Patient Outcomes</h4>
+            <p>Direct measurement of patient safety metrics, care quality, and experience — not proxy metrics.</p>
+          </div>
+          <div class="pillar" data-index="3">
+            <div class="pillar-num">04</div>
+            <h4>Operational Continuity</h4>
+            <p>Ongoing monitoring, retraining pipelines, and governance structures to maintain performance over time.</p>
+          </div>
+          <div class="pillar" data-index="4">
+            <div class="pillar-num">05</div>
+            <h4>Clinician Adoption</h4>
+            <p>Trust-building, transparency mechanisms, training, and change management for sustainable use.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section id="impact" class="section-dark">
+    <div class="container">
+      <div class="section-header light">
+        <span class="label">Real-World Impact</span>
+        <h2>Evidence from the Field</h2>
+        <p class="section-desc">Partner institutions applying the TIPOCA framework show measurable improvements in safe AI integration outcomes.</p>
+      </div>
+      <div class="impact-timeline" id="impact-timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2022</div>
+          <div class="timeline-content">
+            <h4>Sepsis Early Warning Study</h4>
+            <p>Partnered with 3 hospital systems to evaluate sepsis prediction models. Identified 3 models with critical subgroup failures not visible in aggregate metrics.</p>
+            <div class="timeline-tags"><span>Safety</span><span>Sepsis</span><span>Subgroup Analysis</span></div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2023</div>
+          <div class="timeline-content">
+            <h4>Radiology AI Deployment Audit</h4>
+            <p>Audited 8 radiology AI deployments across chest X-ray interpretation. Developed the first standardized radiology AI performance monitoring protocol.</p>
+            <div class="timeline-tags"><span>Radiology</span><span>Monitoring</span><span>Standards</span></div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2024</div>
+          <div class="timeline-content">
+            <h4>Equity-Centered Evaluation Toolkit</h4>
+            <p>Released open-source toolkit for detecting and quantifying healthcare AI disparities, adopted by 47 institutions in year one.</p>
+            <div class="timeline-tags"><span>Equity</span><span>Open Source</span><span>Toolkit</span></div>
+          </div>
+        </div>
+        <div class="timeline-item active">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2025–</div>
+          <div class="timeline-content">
+            <h4>National AI Monitoring Consortium</h4>
+            <p>Leading a multi-site consortium to establish shared post-deployment surveillance infrastructure for clinical AI across 20+ health systems.</p>
+            <div class="timeline-tags"><span>Ongoing</span><span>Consortium</span><span>Surveillance</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOMAIN NETWORK -->
+  <section id="network-section" class="section-light">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Research Connections</span>
+        <h2>Interdisciplinary Knowledge Graph</h2>
+        <p class="section-desc">Our work sits at the intersection of ML, clinical informatics, ethics, and health policy. Drag nodes to explore relationships.</p>
+      </div>
+      <div id="network-chart"></div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="section-dark">
+    <div class="container">
+      <div class="section-header light">
+        <span class="label">Our Team</span>
+        <h2>Researchers & Collaborators</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar" style="background:#5BC8E8">SK</div>
+          <h4>Dr. Sarah Kim</h4>
+          <p class="team-role">Principal Investigator</p>
+          <p class="team-focus">Clinical AI safety, post-deployment surveillance</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background:#1B2D6B">MP</div>
+          <h4>Dr. Marcus Patel</h4>
+          <p class="team-role">Co-Investigator</p>
+          <p class="team-focus">ML fairness, subgroup evaluation methodology</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background:#5BC8E8">LN</div>
+          <h4>Dr. Linh Nguyen</h4>
+          <p class="team-role">Clinical Lead</p>
+          <p class="team-focus">Emergency medicine, sepsis prediction systems</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background:#1B2D6B">JR</div>
+          <h4>Jordan Reyes, PhD</h4>
+          <p class="team-role">Research Scientist</p>
+          <p class="team-focus">NLP, clinical notes, LLM evaluation</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background:#5BC8E8">AT</div>
+          <h4>Aisha Thompson</h4>
+          <p class="team-role">Research Engineer</p>
+          <p class="team-focus">Monitoring infrastructure, open-source tooling</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background:#1B2D6B">CF</div>
+          <h4>Dr. Carlos Fuentes</h4>
+          <p class="team-role">Health Policy Advisor</p>
+          <p class="team-focus">Regulatory frameworks, FDA AI/ML guidance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications" class="section-light">
+    <div class="container">
+      <div class="section-header">
+        <span class="label">Publications</span>
+        <h2>Selected Research Output</h2>
+      </div>
+      <div class="pub-list">
+        <div class="pub-item">
+          <div class="pub-year">2025</div>
+          <div class="pub-body">
+            <h4>Post-Deployment Surveillance of Clinical AI: A Multi-Site Framework</h4>
+            <p class="pub-authors">Kim S, Patel M, Nguyen L, et al.</p>
+            <p class="pub-venue">Nature Medicine · 2025</p>
+            <div class="pub-tags"><span class="tag">Monitoring</span><span class="tag">Safety</span></div>
+          </div>
+          <a href="#" class="pub-link">PDF</a>
+        </div>
+        <div class="pub-item">
+          <div class="pub-year">2024</div>
+          <div class="pub-body">
+            <h4>Measuring Racial Disparities in Deployed Sepsis Prediction Models</h4>
+            <p class="pub-authors">Patel M, Thompson A, Kim S.</p>
+            <p class="pub-venue">NEJM AI · 2024</p>
+            <div class="pub-tags"><span class="tag">Equity</span><span class="tag">Sepsis</span></div>
+          </div>
+          <a href="#" class="pub-link">PDF</a>
+        </div>
+        <div class="pub-item">
+          <div class="pub-year">2024</div>
+          <div class="pub-body">
+            <h4>Alert Fatigue in AI-Augmented Clinical Workflows: A Systematic Review</h4>
+            <p class="pub-authors">Nguyen L, Reyes J, Kim S.</p>
+            <p class="pub-venue">JAMIA · 2024</p>
+            <div class="pub-tags"><span class="tag">Workflow</span><span class="tag">Adoption</span></div>
+          </div>
+          <a href="#" class="pub-link">PDF</a>
+        </div>
+        <div class="pub-item">
+          <div class="pub-year">2023</div>
+          <div class="pub-body">
+            <h4>Temporal Stability of Radiology AI: Lessons from an 8-Site Audit</h4>
+            <p class="pub-authors">Kim S, Fuentes C, Patel M, et al.</p>
+            <p class="pub-venue">Radiology: Artificial Intelligence · 2023</p>
+            <div class="pub-tags"><span class="tag">Radiology</span><span class="tag">Drift</span></div>
+          </div>
+          <a href="#" class="pub-link">PDF</a>
+        </div>
+        <div class="pub-item">
+          <div class="pub-year">2023</div>
+          <div class="pub-body">
+            <h4>The TIPOCA Framework: Five Pillars for Operationalizing Healthcare AI</h4>
+            <p class="pub-authors">Kim S, Patel M, Nguyen L, Reyes J, Thompson A, Fuentes C.</p>
+            <p class="pub-venue">The Lancet Digital Health · 2023</p>
+            <div class="pub-tags"><span class="tag">Framework</span><span class="tag">Policy</span></div>
+          </div>
+          <a href="#" class="pub-link">PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="images/logo-dark.png" alt="TIPOCA" class="footer-logo-img" />
+        <p>Operationalizing AI in Healthcare Research Initiative</p>
+      </div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#findings">Findings</a>
+        <a href="#framework">Framework</a>
+        <a href="#publications">Publications</a>
+      </div>
+      <div class="footer-copy">
+        <p>&copy; 2025 TIPOCA Research Lab. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
