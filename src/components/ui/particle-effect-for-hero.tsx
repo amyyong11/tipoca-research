@@ -46,9 +46,26 @@ const REPULSION_STRENGTH = 1.2; // Multiplier for mouse push force
 
 const randomRange = (min: number, max: number) => Math.random() * (max - min) + min;
 
+interface LogoPixelData {
+  data: Uint8ClampedArray;
+  w: number;
+  h: number;
+}
+
+interface LogoRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 // --- Components ---
 
-export const AntiGravityCanvas: React.FC = () => {
+interface AntiGravityCanvasProps {
+  logoRef?: React.RefObject<HTMLImageElement | null>;
+}
+
+export const AntiGravityCanvas: React.FC<AntiGravityCanvasProps> = ({ logoRef }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [debugInfo, setDebugInfo] = useState({ count: 0, fps: 0 });
@@ -59,6 +76,31 @@ export const AntiGravityCanvas: React.FC = () => {
   const mouseRef = useRef<MouseState>({ x: -1000, y: -1000, isActive: false });
   const frameIdRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
+  const logoPixelDataRef = useRef<LogoPixelData | null>(null);
+  const logoRectRef = useRef<LogoRect | null>(null);
+
+  // Load logo pixel data for shape-aware repulsion
+  useEffect(() => {
+    const img = logoRef?.current;
+    if (!img) return;
+
+    const extract = () => {
+      const off = document.createElement('canvas');
+      off.width = img.naturalWidth;
+      off.height = img.naturalHeight;
+      const offCtx = off.getContext('2d');
+      if (!offCtx) return;
+      offCtx.drawImage(img, 0, 0);
+      try {
+        const id = offCtx.getImageData(0, 0, off.width, off.height);
+        logoPixelDataRef.current = { data: id.data, w: off.width, h: off.height };
+      } catch { /* cross-origin guard */ }
+    };
+
+    if (img.complete && img.naturalWidth > 0) extract();
+    else img.addEventListener('load', extract);
+    return () => img.removeEventListener('load', extract);
+  }, [logoRef]);
 
   // Initialize Particles
   const initParticles = useCallback((width: number, height: number) => {
@@ -191,7 +233,37 @@ export const AntiGravityCanvas: React.FC = () => {
         p.vy -= forceDirectionY * repulsion * 5;
       }
 
-      // 3. Spring Force (Return to Origin)
+      // 3. Logo Shape Repulsion (alpha-gradient based)
+      const lr = logoRectRef.current;
+      const ld = logoPixelDataRef.current;
+      if (lr && ld) {
+        const margin = 20;
+        if (
+          p.x >= lr.x - margin && p.x <= lr.x + lr.width + margin &&
+          p.y >= lr.y - margin && p.y <= lr.y + lr.height + margin
+        ) {
+          const sampleAlpha = (sx: number, sy: number): number => {
+            const ix = Math.round((sx - lr.x) / lr.width * (ld.w - 1));
+            const iy = Math.round((sy - lr.y) / lr.height * (ld.h - 1));
+            if (ix < 0 || ix >= ld.w || iy < 0 || iy >= ld.h) return 0;
+            return ld.data[(iy * ld.w + ix) * 4 + 3];
+          };
+
+          const alpha = sampleAlpha(p.x, p.y);
+          if (alpha > 20) {
+            // Gradient of alpha map points toward denser logo area — negate to flee
+            const step = 5;
+            const gx = sampleAlpha(p.x + step, p.y) - sampleAlpha(p.x - step, p.y);
+            const gy = sampleAlpha(p.x, p.y + step) - sampleAlpha(p.x, p.y - step);
+            const gmag = Math.sqrt(gx * gx + gy * gy) || 1;
+            const strength = (alpha / 255) * 6;
+            p.vx -= (gx / gmag) * strength;
+            p.vy -= (gy / gmag) * strength;
+          }
+        }
+      }
+
+      // 4. Spring Force (Return to Origin)
       const springDx = p.originX - p.x;
       const springDy = p.originY - p.y;
 
@@ -308,6 +380,19 @@ export const AntiGravityCanvas: React.FC = () => {
 
         // Re-init particles for new dimensions
         initParticles(width, height);
+
+        // Update logo rect relative to canvas container
+        const logo = logoRef?.current;
+        if (logo && containerRef.current) {
+          const cRect = containerRef.current.getBoundingClientRect();
+          const lRect = logo.getBoundingClientRect();
+          logoRectRef.current = {
+            x: lRect.left - cRect.left,
+            y: lRect.top - cRect.top,
+            width: lRect.width,
+            height: lRect.height,
+          };
+        }
       }
     };
 
