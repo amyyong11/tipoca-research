@@ -6,7 +6,6 @@ import { AntiGravityCanvas } from '@/components/ui/particle-effect-for-hero';
 
 export default function LandingPage() {
   const navRef = useRef<HTMLElement>(null);
-  const heroLogoRef = useRef<HTMLImageElement>(null);
   const [navOpen, setNavOpen] = useState(false);
   const barChartRef = useRef<HTMLDivElement>(null);
   const lineChartRef = useRef<HTMLDivElement>(null);
@@ -429,9 +428,9 @@ export default function LandingPage() {
 
       {/* HERO */}
       <section id="hero" style={{ position: 'relative' }}>
-        <AntiGravityCanvas logoRef={heroLogoRef} />
+        <AntiGravityCanvas />
         <div className="hero-content" style={{ position: 'relative', zIndex: 10 }}>
-          <img ref={heroLogoRef} src="/images/logo-dark.png" alt="TIPOCA" className="hero-logo" />
+          <img src="/images/logo-dark.png" alt="TIPOCA" className="hero-logo" />
           <p className="hero-eyebrow">Research Initiative</p>
           <h1>Operationalizing<br /><span className="accent">AI in Healthcare</span></h1>
           <p className="hero-sub">TIPOCA conducts rigorous supporting research to bridge the gap between cutting-edge machine learning and safe, equitable clinical deployment.</p>
