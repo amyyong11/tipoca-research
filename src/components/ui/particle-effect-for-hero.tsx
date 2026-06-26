@@ -35,8 +35,8 @@ interface MouseState {
 
 // --- Configuration Constants ---
 
-const PARTICLE_DENSITY = 0.00015; // Particles per pixel squared (adjust for density)
-const BG_PARTICLE_DENSITY = 0.00005; // Less dense for background
+const PARTICLE_DENSITY = 0.0004; // Particles per pixel squared (adjust for density)
+const BG_PARTICLE_DENSITY = 0.00015; // Less dense for background
 const MOUSE_RADIUS = 180; // Radius of mouse influence
 const RETURN_SPEED = 0.08; // How fast particles fly back to origin (spring constant)
 const DAMPING = 0.90; // Friction (velocity decay)
