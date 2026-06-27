@@ -323,27 +323,32 @@ export const AntiGravityCanvas: React.FC = () => {
     return () => cancelAnimationFrame(frameIdRef.current);
   }, [animate]);
 
-  // Mouse Handlers
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    mouseRef.current = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-      isActive: true,
+  // Mouse Handlers — listen on window so overlay DOM elements don't block events
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      mouseRef.current = {
+        x,
+        y,
+        isActive: x >= 0 && x <= rect.width && y >= 0 && y <= rect.height,
+      };
     };
-  };
-
-  const handleMouseLeave = () => {
-    mouseRef.current.isActive = false;
-  };
+    const onLeave = () => { mouseRef.current.isActive = false; };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseleave', onLeave);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseleave', onLeave);
+    };
+  }, []);
 
   return (
     <div
       ref={containerRef}
       className="absolute inset-0 z-0 overflow-hidden bg-black cursor-crosshair"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
     >
       <canvas ref={canvasRef} className="block w-full h-full" />
 
