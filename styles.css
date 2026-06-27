@@ -77,9 +77,17 @@ img { max-width: 100%; }
 h2 {
   font-size: clamp(1.75rem, 3.5vw, 2.6rem);
   font-weight: 800;
-  color: var(--white);
   line-height: 1.2;
   margin-bottom: 16px;
+  background: linear-gradient(
+    to right,
+    #c8d0d8 0%, #ffffff 12%, #a0aab5 24%,
+    #e0e6ea 36%, #ffffff 48%, #b0bac4 60%,
+    #e8ecf0 72%, #ffffff 84%, #c0c8d0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 h3 { font-size: 1.25rem; font-weight: 700; color: var(--white); }
 h4 { font-size: 1rem;    font-weight: 700; color: var(--white); }
@@ -90,6 +98,30 @@ h4 { font-size: 1rem;    font-weight: 700; color: var(--white); }
 }
 
 .accent { color: var(--cyan); }
+
+.hero-title-metallic {
+  background: linear-gradient(
+    to right,
+    #c8d0d8 0%, #ffffff 12%, #a0aab5 24%,
+    #e0e6ea 36%, #ffffff 48%, #b0bac4 60%,
+    #e8ecf0 72%, #ffffff 84%, #c0c8d0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title-metallic .accent {
+  background: linear-gradient(
+    to right,
+    #1a6880 0%, #5BC8E8 14%, #a8e8f8 26%,
+    #2a90ae 38%, #5BC8E8 50%, #1a6880 62%,
+    #7dd8f0 74%, #2a90ae 86%, #5BC8E8 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 /* ============================================================
    NAVBAR

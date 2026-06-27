@@ -434,7 +434,7 @@ export default function LandingPage() {
         <div className="hero-content" style={{ position: 'relative', zIndex: 10 }}>
           <img src={`${BASE}/images/logo-dark.png`} alt="TIPOCA" className="hero-logo" />
           <p className="hero-eyebrow">Research Initiative</p>
-          <h1>Operationalizing<br /><span className="accent">AI in Healthcare</span></h1>
+          <h1 className="hero-title-metallic">Operationalizing<br /><span className="accent">AI in Healthcare</span></h1>
           <p className="hero-sub">TIPOCA conducts rigorous supporting research to bridge the gap between cutting-edge machine learning and safe, equitable clinical deployment.</p>
           <div className="hero-cta">
             <a href="#findings" className="btn-primary">Explore Findings</a>
@@ -484,32 +484,32 @@ export default function LandingPage() {
       <section id="findings" className="section-dark">
         <div className="container">
           <div className="section-header light">
-            <span className="label">Key Findings</span>
-            <h2>What the Research Reveals</h2>
-            <p className="section-desc">Across five clinical domains and three years of study, we identified consistent patterns in where AI succeeds and where it struggles in real hospital environments.</p>
+            <span className="label">Current Study</span>
+            <h2>Benchmarking VLM Reliability in Healthcare</h2>
+            <p className="section-desc">Evaluating multimodal vision-language models on procedural clinical video understanding — from nursing procedures to surgical skill assessment — across core capability and procedural reasoning tasks.</p>
           </div>
           <div className="findings-grid">
             <div className="stat-column">
               <div className="stat-card">
-                <div className="stat-number">73<span>%</span></div>
-                <div className="stat-label">of AI systems showed significant performance degradation within 18 months of deployment due to data drift</div>
+                <div className="stat-number">1,538</div>
+                <div className="stat-label">nursing procedural videos (144 hours) across 51 procedure categories in the NurViD dataset</div>
               </div>
               <div className="stat-card">
-                <div className="stat-number">4.2<span>×</span></div>
-                <div className="stat-label">greater disparity in model accuracy across racial subgroups compared to aggregate benchmark scores</div>
+                <div className="stat-number">314</div>
+                <div className="stat-label">surgical suturing assessment videos (~26 hours) with expert OSATS skill ratings in AIxSuture</div>
               </div>
               <div className="stat-card">
-                <div className="stat-number">61<span>%</span></div>
-                <div className="stat-label">reduction in clinical adoption when AI outputs lacked explainability features trusted by clinicians</div>
+                <div className="stat-number">12<span>+</span></div>
+                <div className="stat-label">VLMs evaluated — open-source, proprietary frontier, and medically specialized models</div>
               </div>
               <div className="stat-card">
-                <div className="stat-number">2.1<span>×</span></div>
-                <div className="stat-label">higher patient safety event rate when AI alerts fired without human-in-the-loop review protocols</div>
+                <div className="stat-number">2</div>
+                <div className="stat-label">evaluation tiers: core capability tasks and higher-level procedural reasoning assessments</div>
               </div>
             </div>
             <div className="chart-panel">
-              <h3 className="chart-title">Model Performance by Clinical Domain</h3>
-              <p className="chart-subtitle">Benchmark accuracy vs. real-world deployment accuracy</p>
+              <h3 className="chart-title">VLM Performance by Clinical Domain</h3>
+              <p className="chart-subtitle">Benchmark accuracy vs. deployed performance across procedure categories</p>
               <div id="bar-chart" ref={barChartRef}></div>
               <div className="chart-legend">
                 <span className="legend-item"><span className="dot navy-dot"></span>Benchmark</span>
@@ -518,8 +518,8 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="drift-panel">
-            <h3 className="chart-title">Model Accuracy Drift Over Time</h3>
-            <p className="chart-subtitle">Average AUC across 12 deployed models, 6-month rolling window</p>
+            <h3 className="chart-title">VLM Calibration Error Over Procedural Complexity</h3>
+            <p className="chart-subtitle">Average AUC across models — illustrative benchmark target</p>
             <div id="line-chart" ref={lineChartRef}></div>
           </div>
         </div>
@@ -570,45 +570,45 @@ export default function LandingPage() {
       <section id="impact" className="section-dark">
         <div className="container">
           <div className="section-header light">
-            <span className="label">Real-World Impact</span>
-            <h2>Evidence from the Field</h2>
-            <p className="section-desc">Partner institutions applying the TIPOCA framework show measurable improvements in safe AI integration outcomes.</p>
+            <span className="label">Study Phases</span>
+            <h2>Research Roadmap</h2>
+            <p className="section-desc">The study is conducted in three phases, from dataset preparation and baseline benchmarking through to hallucination analysis and deployment readiness assessment.</p>
           </div>
           <div className="impact-timeline" id="impact-timeline">
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-year">2022</div>
-              <div className="timeline-content">
-                <h4>Sepsis Early Warning Study</h4>
-                <p>Partnered with 3 hospital systems to evaluate sepsis prediction models. Identified 3 models with critical subgroup failures not visible in aggregate metrics.</p>
-                <div className="timeline-tags"><span>Safety</span><span>Sepsis</span><span>Subgroup Analysis</span></div>
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-year">2023</div>
-              <div className="timeline-content">
-                <h4>Radiology AI Deployment Audit</h4>
-                <p>Audited 8 radiology AI deployments across chest X-ray interpretation. Developed the first standardized radiology AI performance monitoring protocol.</p>
-                <div className="timeline-tags"><span>Radiology</span><span>Monitoring</span><span>Standards</span></div>
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-year">2024</div>
-              <div className="timeline-content">
-                <h4>Equity-Centered Evaluation Toolkit</h4>
-                <p>Released open-source toolkit for detecting and quantifying healthcare AI disparities, adopted by 47 institutions in year one.</p>
-                <div className="timeline-tags"><span>Equity</span><span>Open Source</span><span>Toolkit</span></div>
-              </div>
-            </div>
             <div className="timeline-item active">
               <div className="timeline-dot"></div>
-              <div className="timeline-year">2025–</div>
+              <div className="timeline-year">Phase 1</div>
               <div className="timeline-content">
-                <h4>National AI Monitoring Consortium</h4>
-                <p>Leading a multi-site consortium to establish shared post-deployment surveillance infrastructure for clinical AI across 20+ health systems.</p>
-                <div className="timeline-tags"><span>Ongoing</span><span>Consortium</span><span>Surveillance</span></div>
+                <h4>Dataset Preparation &amp; Baseline Benchmarking</h4>
+                <p>Preprocessing NurViD and AIxSuture datasets and establishing standardized benchmarking pipelines for all selected VLMs under identical prompt and evaluation conditions.</p>
+                <div className="timeline-tags"><span>NurViD</span><span>AIxSuture</span><span>Preprocessing</span></div>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot"></div>
+              <div className="timeline-year">Phase 2</div>
+              <div className="timeline-content">
+                <h4>Two-Tier Benchmark Evaluation</h4>
+                <p>Tier 1 evaluates core capability tasks — procedure recognition, action classification, and skill assessment. Tier 2 evaluates procedural reasoning: temporal ordering, missing step detection, and rubric-based reasoning.</p>
+                <div className="timeline-tags"><span>Core Capability</span><span>Procedural Reasoning</span><span>VLM Evaluation</span></div>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot"></div>
+              <div className="timeline-year">Phase 3</div>
+              <div className="timeline-content">
+                <h4>Hallucination &amp; Clinical Safety Analysis</h4>
+                <p>Clinician-reviewed probe questions and contradiction testing against verified procedural annotations to identify failure modes, characterize hallucination patterns, and assess deployment readiness.</p>
+                <div className="timeline-tags"><span>Hallucination</span><span>Safety</span><span>Failure Modes</span></div>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-dot"></div>
+              <div className="timeline-year">Output</div>
+              <div className="timeline-content">
+                <h4>Open-Source Framework &amp; Publications</h4>
+                <p>Reproducible evaluation codebase, peer-reviewed manuscripts, and open-source audit protocols to support future research on VLM safety and reliability in healthcare education and clinical assessment.</p>
+                <div className="timeline-tags"><span>Open Source</span><span>Publication</span><span>Audit Framework</span></div>
               </div>
             </div>
           </div>
@@ -636,40 +636,16 @@ export default function LandingPage() {
           </div>
           <div className="team-grid">
             <div className="team-card">
-              <div className="team-avatar" style={{ background: '#5BC8E8' }}>SK</div>
-              <h4>Dr. Sarah Kim</h4>
+              <div className="team-avatar" style={{ background: '#5BC8E8' }}>SG</div>
+              <h4>Dr. Samir Grover</h4>
               <p className="team-role">Principal Investigator</p>
-              <p className="team-focus">Clinical AI safety, post-deployment surveillance</p>
+              <p className="team-focus">Scarborough Health Network Research Institute</p>
             </div>
             <div className="team-card">
-              <div className="team-avatar" style={{ background: '#1B2D6B' }}>MP</div>
-              <h4>Dr. Marcus Patel</h4>
+              <div className="team-avatar" style={{ background: '#5BC8E8' }}>JL</div>
+              <h4>Dr. Joshua Landy</h4>
               <p className="team-role">Co-Investigator</p>
-              <p className="team-focus">ML fairness, subgroup evaluation methodology</p>
-            </div>
-            <div className="team-card">
-              <div className="team-avatar" style={{ background: '#5BC8E8' }}>LN</div>
-              <h4>Dr. Linh Nguyen</h4>
-              <p className="team-role">Clinical Lead</p>
-              <p className="team-focus">Emergency medicine, sepsis prediction systems</p>
-            </div>
-            <div className="team-card">
-              <div className="team-avatar" style={{ background: '#1B2D6B' }}>JR</div>
-              <h4>Jordan Reyes, PhD</h4>
-              <p className="team-role">Research Scientist</p>
-              <p className="team-focus">NLP, clinical notes, LLM evaluation</p>
-            </div>
-            <div className="team-card">
-              <div className="team-avatar" style={{ background: '#5BC8E8' }}>AT</div>
-              <h4>Aisha Thompson</h4>
-              <p className="team-role">Research Engineer</p>
-              <p className="team-focus">Monitoring infrastructure, open-source tooling</p>
-            </div>
-            <div className="team-card">
-              <div className="team-avatar" style={{ background: '#1B2D6B' }}>CF</div>
-              <h4>Dr. Carlos Fuentes</h4>
-              <p className="team-role">Health Policy Advisor</p>
-              <p className="team-focus">Regulatory frameworks, FDA AI/ML guidance</p>
+              <p className="team-focus">Scarborough Health Network Research Institute</p>
             </div>
           </div>
         </div>
@@ -684,11 +660,7 @@ export default function LandingPage() {
           </div>
           <div className="pub-list">
             {[
-              { year: 2025, title: 'Post-Deployment Surveillance of Clinical AI: A Multi-Site Framework', authors: 'Kim S, Patel M, Nguyen L, et al.', venue: 'Nature Medicine · 2025', tags: ['Monitoring', 'Safety'] },
-              { year: 2024, title: 'Measuring Racial Disparities in Deployed Sepsis Prediction Models', authors: 'Patel M, Thompson A, Kim S.', venue: 'NEJM AI · 2024', tags: ['Equity', 'Sepsis'] },
-              { year: 2024, title: 'Alert Fatigue in AI-Augmented Clinical Workflows: A Systematic Review', authors: 'Nguyen L, Reyes J, Kim S.', venue: 'JAMIA · 2024', tags: ['Workflow', 'Adoption'] },
-              { year: 2023, title: 'Temporal Stability of Radiology AI: Lessons from an 8-Site Audit', authors: 'Kim S, Fuentes C, Patel M, et al.', venue: 'Radiology: Artificial Intelligence · 2023', tags: ['Radiology', 'Drift'] },
-              { year: 2023, title: 'The TIPOCA Framework: Five Pillars for Operationalizing Healthcare AI', authors: 'Kim S, Patel M, Nguyen L, Reyes J, Thompson A, Fuentes C.', venue: 'The Lancet Digital Health · 2023', tags: ['Framework', 'Policy'] },
+              { year: 2026, title: 'Benchmarking VLM Reliability in Healthcare: A Comprehensive Audit Framework for Procedural Clinical Video Understanding', authors: 'Grover S, Landy J, et al.', venue: 'Scarborough Health Network Research Institute · In Preparation', tags: ['VLM', 'Benchmarking', 'Clinical Safety'] },
             ].map((pub, i) => (
               <div className="pub-item" key={i}>
                 <div className="pub-year">{pub.year}</div>
