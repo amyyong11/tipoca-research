@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { AntiGravityCanvas } from '@/components/ui/particle-effect-for-hero';
 
+const BASE = process.env.NODE_ENV === 'production' ? '/tipoca-research' : '';
+
 export default function LandingPage() {
   const navRef = useRef<HTMLElement>(null);
   const [navOpen, setNavOpen] = useState(false);
@@ -412,7 +414,7 @@ export default function LandingPage() {
       <nav id="navbar" ref={navRef}>
         <div className="nav-inner">
           <a href="#hero" className="nav-logo">
-            <img src="/images/logo-dark.png" alt="TIPOCA" className="nav-logo-img" />
+            <img src={`${BASE}/images/logo-dark.png`} alt="TIPOCA" className="nav-logo-img" />
           </a>
           <button type="button" className="nav-toggle" onClick={() => setNavOpen(o => !o)} aria-label="Toggle menu">&#9776;</button>
           <ul className={`nav-links${navOpen ? ' open' : ''}`} id="nav-links">
@@ -430,7 +432,7 @@ export default function LandingPage() {
       <section id="hero" style={{ position: 'relative' }}>
         <AntiGravityCanvas />
         <div className="hero-content" style={{ position: 'relative', zIndex: 10 }}>
-          <img src="/images/logo-dark.png" alt="TIPOCA" className="hero-logo" />
+          <img src={`${BASE}/images/logo-dark.png`} alt="TIPOCA" className="hero-logo" />
           <p className="hero-eyebrow">Research Initiative</p>
           <h1>Operationalizing<br /><span className="accent">AI in Healthcare</span></h1>
           <p className="hero-sub">TIPOCA conducts rigorous supporting research to bridge the gap between cutting-edge machine learning and safe, equitable clinical deployment.</p>
@@ -707,7 +709,7 @@ export default function LandingPage() {
       <footer>
         <div className="container footer-inner">
           <div className="footer-brand">
-            <img src="/images/logo-dark.png" alt="TIPOCA" className="footer-logo-img" />
+            <img src={`${BASE}/images/logo-dark.png`} alt="TIPOCA" className="footer-logo-img" />
             <p>Operationalizing AI in Healthcare Research Initiative</p>
           </div>
           <div className="footer-links">
