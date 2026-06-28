@@ -356,18 +356,25 @@ export default function LandingPage() {
       });
 
     node.append('text')
-      .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-      .attr('font-size', d => d.size > 16 ? 10 : 8.5)
-      .attr('font-weight', 700)
-      .attr('fill', d => d.group === 1 ? '#4080D0' : '#FFFFFF')
+      .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'hanging')
+      .attr('y', d => d.size + 6)
+      .attr('font-size', 10)
+      .attr('font-weight', 600)
+      .attr('fill', '#FFFFFF')
       .attr('pointer-events', 'none')
       .each(function(d) {
-        const words = d.id.split(' / ');
-        if (words.length > 1) {
-          d3.select(this).append('tspan').attr('x', 0).attr('dy', '-0.5em').text(words[0]);
-          d3.select(this).append('tspan').attr('x', 0).attr('dy', '1.1em').text(words[1]);
+        const slashParts = d.id.split(' / ');
+        const spaceParts = d.id.split(' ');
+        if (slashParts.length > 1) {
+          d3.select(this).append('tspan').attr('x', 0).attr('dy', 0).text(slashParts[0]);
+          d3.select(this).append('tspan').attr('x', 0).attr('dy', '1.3em').text(slashParts[1]);
+        } else if (spaceParts.length > 1) {
+          const mid = Math.ceil(spaceParts.length / 2);
+          d3.select(this).append('tspan').attr('x', 0).attr('dy', 0).text(spaceParts.slice(0, mid).join(' '));
+          d3.select(this).append('tspan').attr('x', 0).attr('dy', '1.3em').text(spaceParts.slice(mid).join(' '));
         } else {
-          d3.select(this).text(d.id);
+          d3.select(this).append('tspan').attr('x', 0).attr('dy', 0).text(d.id);
         }
       });
 
