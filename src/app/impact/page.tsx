@@ -55,7 +55,7 @@ export default function ImpactPage() {
       { source: 'Governance',      target: 'Regulatory'     },
     ];
 
-    const colors = ['#1B2D6B', '#5BC8E8', '#2D5A9E'];
+    const colors = ['#4080D0', '#5BC8E8', '#5590D8'];
     const W = container.clientWidth || 900;
     const H = 480;
 
@@ -69,7 +69,7 @@ export default function ImpactPage() {
       .force('collide', d3.forceCollide<NodeDatum>().radius(d => d.size + 14));
 
     const link = svg.append('g').selectAll('line').data(links).enter().append('line')
-      .attr('stroke', 'rgba(27,45,107,0.18)').attr('stroke-width', 1.5);
+      .attr('stroke', 'rgba(91,200,232,0.18)').attr('stroke-width', 1.5);
 
     const tip = d3.select('body').append('div')
       .attr('class', 'd3-tooltip').style('opacity', 0).style('position', 'absolute');
@@ -83,7 +83,7 @@ export default function ImpactPage() {
     node.append('circle')
       .attr('r', d => d.size)
       .attr('fill', d => colors[d.group])
-      .attr('stroke', d => d.group === 0 ? '#5BC8E8' : d.group === 1 ? '#1B2D6B' : '#8DDAF0')
+      .attr('stroke', d => d.group === 0 ? '#5BC8E8' : d.group === 1 ? '#4080D0' : '#8DDAF0')
       .attr('stroke-width', 2).style('cursor', 'grab')
       .on('mouseover', (event, d) => {
         tip.transition().duration(150).style('opacity', 1);
@@ -101,7 +101,7 @@ export default function ImpactPage() {
       .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
       .attr('font-size', d => d.size > 16 ? 10 : 8.5)
       .attr('font-weight', 700)
-      .attr('fill', d => d.group === 1 ? '#1B2D6B' : '#FFFFFF')
+      .attr('fill', d => d.group === 1 ? '#4080D0' : '#FFFFFF')
       .attr('pointer-events', 'none')
       .each(function(d) {
         const words = d.id.split(' / ');

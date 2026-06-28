@@ -34,21 +34,21 @@ export default function FrameworkPage() {
       const pts = d3.range(N).map(i => coords(r, i));
       svg.append('polygon')
         .attr('points', pts.map(p => p.join(',')).join(' '))
-        .attr('fill', r === 1 ? 'rgba(27,45,107,0.05)' : 'none')
-        .attr('stroke', 'rgba(27,45,107,0.15)').attr('stroke-width', 1);
+        .attr('fill', r === 1 ? 'rgba(91,200,232,0.05)' : 'none')
+        .attr('stroke', 'rgba(91,200,232,0.15)').attr('stroke-width', 1);
     });
 
     d3.range(N).forEach(i => {
       const [x2, y2] = coords(1, i);
       svg.append('line')
         .attr('x1', cx).attr('y1', cy).attr('x2', x2).attr('y2', y2)
-        .attr('stroke', 'rgba(27,45,107,0.2)').attr('stroke-width', 1);
+        .attr('stroke', 'rgba(91,200,232,0.2)').attr('stroke-width', 1);
     });
 
     const defs = svg.append('defs');
     const radarGrad = defs.append('radialGradient').attr('id', 'radarGrad');
     radarGrad.append('stop').attr('offset', '0%').attr('stop-color', '#5BC8E8').attr('stop-opacity', 0.45);
-    radarGrad.append('stop').attr('offset', '100%').attr('stop-color', '#1B2D6B').attr('stop-opacity', 0.15);
+    radarGrad.append('stop').attr('offset', '100%').attr('stop-color', '#4080D0').attr('stop-opacity', 0.15);
 
     svg.append('polygon')
       .attr('points', pillars.map((d, i) => coords(d.value, i).join(',')).join(' '))
@@ -58,14 +58,14 @@ export default function FrameworkPage() {
     pillars.forEach((d, i) => {
       const [px, py] = coords(d.value, i);
       svg.append('circle').attr('cx', px).attr('cy', py).attr('r', 6)
-        .attr('fill', '#5BC8E8').attr('stroke', '#1B2D6B').attr('stroke-width', 2);
+        .attr('fill', '#5BC8E8').attr('stroke', '#4080D0').attr('stroke-width', 2);
 
       const [lx, ly] = coords(1.22, i);
       const textEl = svg.append('text')
         .attr('x', lx).attr('y', ly)
         .attr('text-anchor', lx < cx - 5 ? 'end' : lx > cx + 5 ? 'start' : 'middle')
         .attr('dominant-baseline', 'middle')
-        .attr('font-size', 12).attr('font-weight', 700).attr('fill', '#1B2D6B');
+        .attr('font-size', 12).attr('font-weight', 700).attr('fill', '#4080D0');
       d.axis.split('\n').forEach((line, li) => {
         textEl.append('tspan').attr('x', lx).attr('dy', li === 0 ? 0 : 14).text(line);
       });
@@ -74,7 +74,7 @@ export default function FrameworkPage() {
       svg.append('text')
         .attr('x', vx).attr('y', vy)
         .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-        .attr('font-size', 10).attr('font-weight', 600).attr('fill', '#1B2D6B')
+        .attr('font-size', 10).attr('font-weight', 600).attr('fill', '#4080D0')
         .text(`${Math.round(d.value * 100)}%`);
     });
   }, []);

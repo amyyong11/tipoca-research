@@ -143,7 +143,7 @@ export default function FindingsPage() {
 
     g.selectAll<SVGCircleElement, Datum>('circle').data(data).enter().append('circle')
       .attr('cx', d => x(d.m)).attr('cy', d => y(d.auc))
-      .attr('r', 4).attr('fill', '#5BC8E8').attr('stroke', '#1B2D6B').attr('stroke-width', 2)
+      .attr('r', 4).attr('fill', '#5BC8E8').attr('stroke', '#4080D0').attr('stroke-width', 2)
       .on('mouseover', (event, d) => {
         tip.transition().duration(150).style('opacity', 1);
         tip.html(`<strong>${months[d.m]}</strong><br/>AUC: ${d.auc.toFixed(2)}`)

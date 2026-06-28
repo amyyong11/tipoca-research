@@ -162,7 +162,7 @@ export default function LandingPage() {
 
     g.selectAll<SVGCircleElement, Datum>('circle').data(data).enter().append('circle')
       .attr('cx', d => x(d.m)).attr('cy', d => y(d.auc))
-      .attr('r', 4).attr('fill', '#5BC8E8').attr('stroke', '#1B2D6B').attr('stroke-width', 2)
+      .attr('r', 4).attr('fill', '#5BC8E8').attr('stroke', '#4080D0').attr('stroke-width', 2)
       .on('mouseover', (event, d) => {
         tip.transition().duration(150).style('opacity', 1);
         tip.html(`<strong>${months[d.m]}</strong><br/>AUC: ${d.auc.toFixed(2)}`)
@@ -217,21 +217,21 @@ export default function LandingPage() {
       const pts = d3.range(N).map(i => coords(r, i));
       svg.append('polygon')
         .attr('points', pts.map(p => p.join(',')).join(' '))
-        .attr('fill', r === 1 ? 'rgba(27,45,107,0.05)' : 'none')
-        .attr('stroke', 'rgba(27,45,107,0.15)').attr('stroke-width', 1);
+        .attr('fill', r === 1 ? 'rgba(91,200,232,0.05)' : 'none')
+        .attr('stroke', 'rgba(91,200,232,0.15)').attr('stroke-width', 1);
     });
 
     d3.range(N).forEach(i => {
       const [x2, y2] = coords(1, i);
       svg.append('line')
         .attr('x1', cx).attr('y1', cy).attr('x2', x2).attr('y2', y2)
-        .attr('stroke', 'rgba(27,45,107,0.2)').attr('stroke-width', 1);
+        .attr('stroke', 'rgba(91,200,232,0.2)').attr('stroke-width', 1);
     });
 
     const defs = svg.append('defs');
     const radarGrad = defs.append('radialGradient').attr('id', 'radarGrad');
     radarGrad.append('stop').attr('offset', '0%').attr('stop-color', '#5BC8E8').attr('stop-opacity', 0.45);
-    radarGrad.append('stop').attr('offset', '100%').attr('stop-color', '#1B2D6B').attr('stop-opacity', 0.15);
+    radarGrad.append('stop').attr('offset', '100%').attr('stop-color', '#4080D0').attr('stop-opacity', 0.15);
 
     svg.append('polygon')
       .attr('points', pillars.map((d, i) => coords(d.value, i).join(',')).join(' '))
@@ -241,14 +241,14 @@ export default function LandingPage() {
     pillars.forEach((d, i) => {
       const [px, py] = coords(d.value, i);
       svg.append('circle').attr('cx', px).attr('cy', py).attr('r', 6)
-        .attr('fill', '#5BC8E8').attr('stroke', '#1B2D6B').attr('stroke-width', 2);
+        .attr('fill', '#5BC8E8').attr('stroke', '#4080D0').attr('stroke-width', 2);
 
       const [lx, ly] = coords(1.22, i);
       const textEl = svg.append('text')
         .attr('x', lx).attr('y', ly)
         .attr('text-anchor', lx < cx - 5 ? 'end' : lx > cx + 5 ? 'start' : 'middle')
         .attr('dominant-baseline', 'middle')
-        .attr('font-size', 12).attr('font-weight', 700).attr('fill', '#1B2D6B');
+        .attr('font-size', 12).attr('font-weight', 700).attr('fill', '#4080D0');
       d.axis.split('\n').forEach((line, li) => {
         textEl.append('tspan').attr('x', lx).attr('dy', li === 0 ? 0 : 14).text(line);
       });
@@ -257,7 +257,7 @@ export default function LandingPage() {
       svg.append('text')
         .attr('x', vx).attr('y', vy)
         .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-        .attr('font-size', 10).attr('font-weight', 600).attr('fill', '#1B2D6B')
+        .attr('font-size', 10).attr('font-weight', 600).attr('fill', '#4080D0')
         .text(`${Math.round(d.value * 100)}%`);
     });
   }, []);
@@ -313,7 +313,7 @@ export default function LandingPage() {
       { source: 'Governance',      target: 'Regulatory'     },
     ];
 
-    const colors = ['#1B2D6B', '#5BC8E8', '#2D5A9E'];
+    const colors = ['#4080D0', '#5BC8E8', '#5590D8'];
     const W = container.clientWidth || 900;
     const H = 480;
 
@@ -327,7 +327,7 @@ export default function LandingPage() {
       .force('collide', d3.forceCollide<NodeDatum>().radius(d => d.size + 14));
 
     const link = svg.append('g').selectAll('line').data(links).enter().append('line')
-      .attr('stroke', 'rgba(27,45,107,0.18)').attr('stroke-width', 1.5);
+      .attr('stroke', 'rgba(91,200,232,0.18)').attr('stroke-width', 1.5);
 
     const tip = d3.select('body').append('div')
       .attr('class', 'd3-tooltip').style('opacity', 0).style('position', 'absolute');
@@ -341,7 +341,7 @@ export default function LandingPage() {
     node.append('circle')
       .attr('r', d => d.size)
       .attr('fill', d => colors[d.group])
-      .attr('stroke', d => d.group === 0 ? '#5BC8E8' : d.group === 1 ? '#1B2D6B' : '#8DDAF0')
+      .attr('stroke', d => d.group === 0 ? '#5BC8E8' : d.group === 1 ? '#4080D0' : '#8DDAF0')
       .attr('stroke-width', 2).style('cursor', 'grab')
       .on('mouseover', (event, d) => {
         tip.transition().duration(150).style('opacity', 1);
@@ -359,7 +359,7 @@ export default function LandingPage() {
       .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
       .attr('font-size', d => d.size > 16 ? 10 : 8.5)
       .attr('font-weight', 700)
-      .attr('fill', d => d.group === 1 ? '#1B2D6B' : '#FFFFFF')
+      .attr('fill', d => d.group === 1 ? '#4080D0' : '#FFFFFF')
       .attr('pointer-events', 'none')
       .each(function(d) {
         const words = d.id.split(' / ');
