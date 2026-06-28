@@ -17,10 +17,10 @@ export default function Home() {
           <Link href="/findings" className="btn-primary">Explore Findings</Link>
           <Link href="/publications" className="btn-ghost">Publications</Link>
         </div>
-      </div>
-      <div className="hero-scroll-hint">
-        <span>Scroll to explore</span>
-        <div className="scroll-arrow"></div>
+        <div className="hero-scroll-hint">
+          <span>Scroll to explore</span>
+          <div className="scroll-arrow"></div>
+        </div>
       </div>
     </section>
   );

@@ -187,7 +187,7 @@ h4 { font-size: 1rem;    font-weight: 700; color: var(--white); }
 
 #hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 120vh;
   background: var(--bg);
   display: flex;
   align-items: center;
@@ -205,7 +205,7 @@ h4 { font-size: 1rem;    font-weight: 700; color: var(--white); }
   z-index: 2;
   max-width: 1140px;
   margin: 0 auto;
-  padding: 120px 24px 80px;
+  padding: 120px 24px 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -284,14 +284,11 @@ h4 { font-size: 1rem;    font-weight: 700; color: var(--white); }
 }
 
 .hero-scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  margin-top: 48px;
   color: var(--text-dim);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
@@ -633,25 +630,38 @@ h4 { font-size: 1rem;    font-weight: 700; color: var(--white); }
 
 footer {
   background: var(--bg-surface);
-  padding: 48px 0;
+  padding: 40px 0 32px;
   border-top: 1px solid var(--border);
 }
 
-.footer-inner {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 32px;
+.footer-top {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
 }
 
-.footer-logo-img { width: 90px; height: auto; display: block; margin-bottom: 8px; }
-.footer-brand p { color: var(--gray); font-size: 0.82rem; }
+.footer-logo-link { display: inline-flex; }
+.footer-logo-img { width: 80px; height: auto; display: block; }
 
-.footer-links { display: flex; gap: 24px; }
-.footer-links a { color: var(--text-dim); font-size: 0.85rem; transition: color var(--transition); }
-.footer-links a:hover { color: var(--cyan); }
+.footer-page-nav { display: flex; gap: 28px; flex-wrap: wrap; justify-content: flex-end; }
+.footer-page-nav a { color: var(--text-dim); font-size: 0.85rem; transition: color var(--transition); }
+.footer-page-nav a:hover { color: var(--cyan); }
 
-.footer-copy { text-align: right; color: var(--gray); font-size: 0.78rem; }
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.footer-external { display: flex; align-items: center; gap: 10px; }
+.footer-external a { color: var(--text-dim); font-size: 0.82rem; transition: color var(--transition); }
+.footer-external a:hover { color: var(--cyan); }
+.footer-dot { color: var(--border); font-size: 0.9rem; }
+
+.footer-copy { color: var(--gray); font-size: 0.78rem; }
 
 /* ============================================================
    D3 CHART OVERRIDES
@@ -678,9 +688,9 @@ footer {
   .findings-grid  { grid-template-columns: 1fr; }
   .framework-vis  { grid-template-columns: 1fr; }
   #radar-chart    { max-width: 380px; margin: 0 auto; }
-  .footer-inner   { grid-template-columns: 1fr; text-align: center; }
-  .footer-links   { justify-content: center; }
-  .footer-copy    { text-align: center; }
+  .footer-top     { flex-direction: column; gap: 24px; text-align: center; }
+  .footer-page-nav { justify-content: center; }
+  .footer-bottom  { flex-direction: column; gap: 12px; text-align: center; }
 }
 
 @media (max-width: 640px) {
