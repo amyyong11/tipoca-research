@@ -35,24 +35,24 @@ export default function AboutPage() {
         </div>
         <div className="about-grid">
           <div className="about-card">
-            <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-            <h3>Multi-Layer Evaluation</h3>
-            <p>We evaluate AI systems across technical performance, clinical validity, and real-world deployment conditions to surface risks invisible in benchmark testing.</p>
+            <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 1 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
+            <h3>Four-Tier Evaluation</h3>
+            <p>We assess VLMs across perception and classification (Tier 1), procedural reasoning (Tier 2), clinical risk and hallucination (Tier 3), and real-world SHN deployment (Tier 4) — moving beyond simple accuracy benchmarks.</p>
           </div>
           <div className="about-card">
-            <div className="card-icon cyan"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-            <h3>Longitudinal Studies</h3>
-            <p>Short-term accuracy does not predict long-term reliability. Our studies track model behaviour over time and across patient populations.</p>
+            <div className="card-icon cyan"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+            <h3>12+ Models Compared</h3>
+            <p>Open-source (Qwen3.6, InternVL), closed-source (Gemini, GPT), and medically-specialized models (LLaVA-Med, Med-Flamingo, MedVInT, RadFM) are evaluated under identical conditions.</p>
           </div>
           <div className="about-card">
-            <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <h3>Stakeholder Integration</h3>
-            <p>Clinicians, patients, and administrators co-design our research protocols, ensuring findings translate to actionable practice change.</p>
+            <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Hallucination &amp; Clinical Risk</h3>
+            <p>We measure procedural, object, anatomical, and sequential hallucinations — and classify VLM errors by clinical risk level (critical, major, minor) to surface the failure modes most dangerous for patient safety.</p>
           </div>
           <div className="about-card">
-            <div className="card-icon cyan"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <h3>Safety First</h3>
-            <p>Every recommendation is grounded in evidence of harm prevention. We maintain a living registry of known failure modes in deployed healthcare AI.</p>
+            <div className="card-icon cyan"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <h3>Reusable Audit Framework</h3>
+            <p>Rather than asking "which model is best?", our framework defines the capability gaps required for deployment — providing a reusable standard any developer can use to test their clinical VLM before release.</p>
           </div>
         </div>
       </div>

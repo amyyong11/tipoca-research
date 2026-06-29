@@ -30,65 +30,66 @@ export default function LandingPage() {
     d3.select(container).selectAll('*').remove();
 
     const data = [
-      { domain: 'Sepsis',      benchmark: 0.89, deployed: 0.71 },
-      { domain: 'Radiology',   benchmark: 0.93, deployed: 0.81 },
-      { domain: 'Cardiology',  benchmark: 0.87, deployed: 0.68 },
-      { domain: 'Oncology',    benchmark: 0.91, deployed: 0.74 },
-      { domain: 'Readmission', benchmark: 0.83, deployed: 0.65 },
+      { task: 'Procedure\nClass.', gemini: 74.68, qwen27: 58.21, qwen35: 55.01 },
+      { task: 'Action\nClass.', gemini: 65.33, qwen27: 44.20, qwen35: 38.59 },
+      { task: 'Joint\nClass.', gemini: 49.28, qwen27: 29.68, qwen35: 27.44 },
     ];
 
-    const margin = { top: 10, right: 10, bottom: 40, left: 44 };
+    const margin = { top: 10, right: 10, bottom: 48, left: 44 };
     const W = container.clientWidth || 480;
     const H = 220;
     const w = W - margin.left - margin.right;
     const h = H - margin.top - margin.bottom;
 
     const svg = d3.select(container)
-      .append('svg')
-      .attr('viewBox', `0 0 ${W} ${H}`)
-      .attr('width', '100%');
-
+      .append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('width', '100%');
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const x0 = d3.scaleBand().domain(data.map(d => d.domain)).range([0, w]).padding(0.28);
-    const x1 = d3.scaleBand().domain(['benchmark', 'deployed']).range([0, x0.bandwidth()]).padding(0.08);
-    const y  = d3.scaleLinear().domain([0.5, 1]).range([h, 0]);
+    const x0 = d3.scaleBand().domain(data.map(d => d.task)).range([0, w]).padding(0.28);
+    const x1 = d3.scaleBand().domain(['gemini', 'qwen27', 'qwen35']).range([0, x0.bandwidth()]).padding(0.06);
+    const y = d3.scaleLinear().domain([0, 100]).range([h, 0]);
 
     g.append('g').attr('class', 'grid')
-      .call(d3.axisLeft(y).ticks(4).tickSize(-w).tickFormat('' as never))
+      .call(d3.axisLeft(y).ticks(5).tickSize(-w).tickFormat('' as never))
       .call(gg => gg.select('.domain').remove())
       .call(gg => gg.selectAll('line').attr('stroke', 'rgba(255,255,255,0.1)'));
 
+    const colors: Record<string, string> = { gemini: '#5BC8E8', qwen27: '#4080D0', qwen35: '#5590D8' };
+
     const groups = g.selectAll('.bar-group').data(data).enter().append('g')
-      .attr('transform', d => `translate(${x0(d.domain)},0)`);
+      .attr('transform', d => `translate(${x0(d.task)},0)`);
 
-    groups.append('rect')
-      .attr('x', x1('benchmark')!)
-      .attr('width', x1.bandwidth())
-      .attr('y', h).attr('height', 0)
-      .attr('fill', 'rgba(255,255,255,0.8)').attr('rx', 3)
-      .transition().duration(800).delay((_, i) => i * 80)
-      .attr('y', d => y(d.benchmark))
-      .attr('height', d => h - y(d.benchmark));
-
-    groups.append('rect')
-      .attr('x', x1('deployed')!)
-      .attr('width', x1.bandwidth())
-      .attr('y', h).attr('height', 0)
-      .attr('fill', '#5BC8E8').attr('rx', 3)
-      .transition().duration(800).delay((_, i) => i * 80 + 100)
-      .attr('y', d => y(d.deployed))
-      .attr('height', d => h - y(d.deployed));
+    (['gemini', 'qwen27', 'qwen35'] as const).forEach(key => {
+      groups.append('rect')
+        .attr('x', x1(key)!).attr('width', x1.bandwidth())
+        .attr('y', h).attr('height', 0)
+        .attr('fill', colors[key]).attr('rx', 3)
+        .transition().duration(800).delay((_, i) => i * 80)
+        .attr('y', d => y(d[key])).attr('height', d => h - y(d[key]));
+    });
 
     g.append('g').attr('transform', `translate(0,${h})`)
       .call(d3.axisBottom(x0).tickSize(0))
       .call(gg => gg.select('.domain').attr('stroke', 'rgba(255,255,255,0.2)'))
-      .call(gg => gg.selectAll('text').attr('fill', 'rgba(255,255,255,0.6)').attr('font-size', '11'));
+      .call(gg => {
+        gg.selectAll('text').remove();
+        gg.selectAll('.tick').each(function(d) {
+          const parts = (d as string).split('\n');
+          const tick = d3.select(this);
+          parts.forEach((line, i) => {
+            tick.append('text')
+              .attr('y', 12 + i * 13).attr('x', 0)
+              .attr('text-anchor', 'middle')
+              .attr('fill', 'rgba(255,255,255,0.6)').attr('font-size', 10)
+              .text(line);
+          });
+        });
+      });
 
     g.append('g')
-      .call(d3.axisLeft(y).ticks(4).tickFormat(d3.format('.0%')))
+      .call(d3.axisLeft(y).ticks(5).tickFormat(d => `${d}%`))
       .call(gg => gg.select('.domain').remove())
-      .call(gg => gg.selectAll('text').attr('fill', 'rgba(255,255,255,0.6)').attr('font-size', '10'));
+      .call(gg => gg.selectAll('text').attr('fill', 'rgba(255,255,255,0.6)').attr('font-size', 10));
   }, []);
 
   // Line chart
@@ -97,11 +98,12 @@ export default function LandingPage() {
     if (!container) return;
     d3.select(container).selectAll('*').remove();
 
-    const months = ['Jan 23','Apr 23','Jul 23','Oct 23','Jan 24','Apr 24','Jul 24','Oct 24','Jan 25','Apr 25'];
-    const data = [
-      { m: 0, auc: 0.88 }, { m: 1, auc: 0.87 }, { m: 2, auc: 0.86 },
-      { m: 3, auc: 0.84 }, { m: 4, auc: 0.82 }, { m: 5, auc: 0.79 },
-      { m: 6, auc: 0.76 }, { m: 7, auc: 0.74 }, { m: 8, auc: 0.72 }, { m: 9, auc: 0.70 },
+    type ModelKey = 'gemini' | 'qwen27' | 'qwen35';
+    const kValues = [1, 2, 3, 4, 5];
+    const series: { key: ModelKey; label: string; color: string; values: number[] }[] = [
+      { key: 'gemini', label: 'Gemini 3.5 Flash', color: '#5BC8E8', values: [74.68, 85.01, 89.20, 90.15, 91.42] },
+      { key: 'qwen27', label: 'Qwen 3.6 27B',     color: '#4080D0', values: [58.21, 69.46, 72.67, 75.76, 77.83] },
+      { key: 'qwen35', label: 'Qwen 3.6 35B',     color: '#5590D8', values: [55.01, 67.97, 73.42, 76.15, 77.76] },
     ];
 
     const margin = { top: 16, right: 24, bottom: 48, left: 52 };
@@ -110,81 +112,45 @@ export default function LandingPage() {
     const w = W - margin.left - margin.right;
     const h = H - margin.top - margin.bottom;
 
-    const svg = d3.select(container)
-      .append('svg')
-      .attr('viewBox', `0 0 ${W} ${H}`)
-      .attr('width', '100%');
-
+    const svg = d3.select(container).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('width', '100%');
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const x = d3.scaleLinear().domain([0, 9]).range([0, w]);
-    const y = d3.scaleLinear().domain([0.60, 0.95]).range([h, 0]);
+    const x = d3.scaleLinear().domain([1, 5]).range([0, w]);
+    const y = d3.scaleLinear().domain([40, 100]).range([h, 0]);
 
     g.append('g')
-      .call(d3.axisLeft(y).ticks(5).tickSize(-w).tickFormat('' as never))
+      .call(d3.axisLeft(y).ticks(6).tickSize(-w).tickFormat('' as never))
       .call(gg => gg.select('.domain').remove())
       .call(gg => gg.selectAll('line').attr('stroke', 'rgba(255,255,255,0.08)'));
 
-    g.append('rect')
-      .attr('x', 0).attr('y', y(0.75)).attr('width', w).attr('height', h - y(0.75))
-      .attr('fill', 'rgba(255,80,80,0.06)');
+    type Datum = { k: number; v: number };
+    const line = d3.line<Datum>().x(d => x(d.k)).y(d => y(d.v)).curve(d3.curveCatmullRom);
 
-    g.append('line')
-      .attr('x1', 0).attr('x2', w).attr('y1', y(0.75)).attr('y2', y(0.75))
-      .attr('stroke', 'rgba(255,120,120,0.4)').attr('stroke-dasharray', '5 4').attr('stroke-width', 1.5);
+    series.forEach(s => {
+      const datum = kValues.map((k, i) => ({ k, v: s.values[i] }));
+      const path = g.append('path').datum(datum).attr('d', line)
+        .attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2.5);
+      const totalLen = (path.node() as SVGPathElement).getTotalLength();
+      path.attr('stroke-dasharray', totalLen).attr('stroke-dashoffset', totalLen)
+        .transition().duration(1400).ease(d3.easeCubicInOut).attr('stroke-dashoffset', 0);
 
-    g.append('text')
-      .attr('x', w - 4).attr('y', y(0.75) - 5)
-      .attr('fill', 'rgba(255,150,150,0.7)').attr('text-anchor', 'end').attr('font-size', 10)
-      .text('Concern threshold (AUC < 0.75)');
-
-    const defs = svg.append('defs');
-    const grad = defs.append('linearGradient').attr('id', 'areaGrad')
-      .attr('x1','0').attr('x2','0').attr('y1','0').attr('y2','1');
-    grad.append('stop').attr('offset','0%').attr('stop-color','#5BC8E8').attr('stop-opacity',0.3);
-    grad.append('stop').attr('offset','100%').attr('stop-color','#5BC8E8').attr('stop-opacity',0.02);
-
-    type Datum = { m: number; auc: number };
-    const area = d3.area<Datum>().x(d => x(d.m)).y0(h).y1(d => y(d.auc)).curve(d3.curveCatmullRom);
-    const line = d3.line<Datum>().x(d => x(d.m)).y(d => y(d.auc)).curve(d3.curveCatmullRom);
-
-    g.append('path').datum(data).attr('d', area).attr('fill', 'url(#areaGrad)');
-
-    const path = g.append('path').datum(data).attr('d', line)
-      .attr('fill', 'none').attr('stroke', '#5BC8E8').attr('stroke-width', 2.5);
-
-    const totalLen = (path.node() as SVGPathElement).getTotalLength();
-    path.attr('stroke-dasharray', totalLen).attr('stroke-dashoffset', totalLen)
-      .transition().duration(1800).ease(d3.easeCubicInOut).attr('stroke-dashoffset', 0);
-
-    const tip = d3.select('body').append('div')
-      .attr('class', 'd3-tooltip').style('opacity', 0).style('position', 'absolute');
-
-    g.selectAll<SVGCircleElement, Datum>('circle').data(data).enter().append('circle')
-      .attr('cx', d => x(d.m)).attr('cy', d => y(d.auc))
-      .attr('r', 4).attr('fill', '#5BC8E8').attr('stroke', '#4080D0').attr('stroke-width', 2)
-      .on('mouseover', (event, d) => {
-        tip.transition().duration(150).style('opacity', 1);
-        tip.html(`<strong>${months[d.m]}</strong><br/>AUC: ${d.auc.toFixed(2)}`)
-          .style('left', (event.pageX + 12) + 'px')
-          .style('top',  (event.pageY - 28) + 'px');
-      })
-      .on('mouseout', () => tip.transition().duration(200).style('opacity', 0));
+      g.selectAll<SVGCircleElement, Datum>(`.dot-${s.key}`).data(datum).enter().append('circle')
+        .attr('cx', d => x(d.k)).attr('cy', d => y(d.v))
+        .attr('r', 4).attr('fill', s.color).attr('stroke', '#000').attr('stroke-width', 1.5);
+    });
 
     g.append('g').attr('transform', `translate(0,${h})`)
-      .call(d3.axisBottom(x).ticks(9).tickFormat(i => months[i as number]))
+      .call(d3.axisBottom(x).ticks(5).tickFormat(d => `Top-${d}`))
       .call(gg => gg.select('.domain').attr('stroke', 'rgba(255,255,255,0.2)'))
       .call(gg => gg.selectAll('text').attr('fill', 'rgba(255,255,255,0.55)').attr('font-size', 10).attr('dy', 12));
 
     g.append('g')
-      .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.2f')))
+      .call(d3.axisLeft(y).ticks(6).tickFormat(d => `${d}%`))
       .call(gg => gg.select('.domain').remove())
       .call(gg => gg.selectAll('text').attr('fill', 'rgba(255,255,255,0.55)').attr('font-size', 10));
 
     g.append('text').attr('transform', 'rotate(-90)').attr('x', -h/2).attr('y', -42)
-      .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)').attr('font-size', 10).text('AUC-ROC');
-
-    return () => { tip.remove(); };
+      .attr('text-anchor', 'middle').attr('fill', 'rgba(255,255,255,0.4)').attr('font-size', 10).text('Accuracy (%)');
   }, []);
 
   // Radar chart
@@ -442,7 +408,7 @@ export default function LandingPage() {
           <img src={`${BASE}/images/logo-dark.png`} alt="TIPOCA" className="hero-logo" />
           <p className="hero-eyebrow">Research Initiative</p>
           <h1 className="hero-title-metallic">Operationalizing<br /><span className="accent">AI in Healthcare</span></h1>
-          <p className="hero-sub">TIPOCA conducts rigorous supporting research to bridge the gap between cutting-edge machine learning and safe, equitable clinical deployment.</p>
+          <p className="hero-sub">We audit vision-language models on clinical procedural video understanding — benchmarking performance, hallucination, and clinical risk across nursing procedures and surgical skill assessment to determine readiness for real-world deployment.</p>
           <div className="hero-cta">
             <a href="#findings" className="btn-primary">Explore Findings</a>
             <a href="#publications" className="btn-ghost">Publications</a>
@@ -464,24 +430,24 @@ export default function LandingPage() {
           </div>
           <div className="about-grid">
             <div className="about-card">
-              <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-              <h3>Multi-Layer Evaluation</h3>
-              <p>We evaluate AI systems across technical performance, clinical validity, and real-world deployment conditions to surface risks invisible in benchmark testing.</p>
+              <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 1 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
+              <h3>Four-Tier Evaluation</h3>
+              <p>We assess VLMs across perception and classification (Tier 1), procedural reasoning (Tier 2), clinical risk and hallucination (Tier 3), and real-world SHN deployment (Tier 4) — moving beyond simple accuracy benchmarks.</p>
             </div>
             <div className="about-card">
-              <div className="card-icon cyan"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-              <h3>Longitudinal Studies</h3>
-              <p>Short-term accuracy does not predict long-term reliability. Our studies track model behaviour over time and across patient populations.</p>
+              <div className="card-icon cyan"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+              <h3>12+ Models Compared</h3>
+              <p>Open-source (Qwen3.6, InternVL), closed-source (Gemini, GPT), and medically-specialized models (LLaVA-Med, Med-Flamingo, MedVInT, RadFM) are evaluated under identical conditions.</p>
             </div>
             <div className="about-card">
-              <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-              <h3>Stakeholder Integration</h3>
-              <p>Clinicians, patients, and administrators co-design our research protocols, ensuring findings translate to actionable practice change.</p>
+              <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <h3>Hallucination &amp; Clinical Risk</h3>
+              <p>We measure procedural, object, anatomical, and sequential hallucinations — and classify VLM errors by clinical risk level (critical, major, minor) to surface the failure modes most dangerous for patient safety.</p>
             </div>
             <div className="about-card">
-              <div className="card-icon cyan"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-              <h3>Safety First</h3>
-              <p>Every recommendation is grounded in evidence of harm prevention. We maintain a living registry of known failure modes in deployed healthcare AI.</p>
+              <div className="card-icon cyan"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <h3>Reusable Audit Framework</h3>
+              <p>Rather than asking "which model is best?", our framework defines the capability gaps required for deployment — providing a reusable standard any developer can use to test their clinical VLM before release.</p>
             </div>
           </div>
         </div>
@@ -493,7 +459,7 @@ export default function LandingPage() {
           <div className="section-header light">
             <span className="label">Current Study</span>
             <h2>Benchmarking VLM Reliability in Healthcare</h2>
-            <p className="section-desc">Evaluating multimodal vision-language models on procedural clinical video understanding — from nursing procedures to surgical skill assessment — across core capability and procedural reasoning tasks.</p>
+            <p className="section-desc">We evaluate 12+ VLMs — open-source, closed-source, and medically-specialized — on nursing procedural recognition (NurViD) and surgical skill assessment (AIxSuture), spanning perception, procedural reasoning, and hallucination detection.</p>
           </div>
           <div className="findings-grid">
             <div className="stat-column">
@@ -510,23 +476,24 @@ export default function LandingPage() {
                 <div className="stat-label">VLMs evaluated — open-source, proprietary frontier, and medically specialized models</div>
               </div>
               <div className="stat-card">
-                <div className="stat-number">2</div>
-                <div className="stat-label">evaluation tiers: core capability tasks and higher-level procedural reasoning assessments</div>
+                <div className="stat-number">4</div>
+                <div className="stat-label">evaluation tiers: from core perception and classification through clinical risk, hallucination, and real-world SHN deployment</div>
               </div>
             </div>
             <div className="chart-panel">
-              <h3 className="chart-title">VLM Performance by Clinical Domain</h3>
-              <p className="chart-subtitle">Benchmark accuracy vs. deployed performance across procedure categories</p>
+              <h3 className="chart-title">Top-1 Accuracy by Task — NurViD</h3>
+              <p className="chart-subtitle">Procedure, action step, and joint classification across 3 models</p>
               <div id="bar-chart" ref={barChartRef}></div>
               <div className="chart-legend">
-                <span className="legend-item"><span className="dot navy-dot"></span>Benchmark</span>
-                <span className="legend-item"><span className="dot cyan-dot"></span>Deployed</span>
+                <span className="legend-item"><span className="dot cyan-dot"></span>Gemini 3.5 Flash</span>
+                <span className="legend-item"><span className="dot" style={{background:'#4080D0',borderRadius:'50%',display:'inline-block',width:10,height:10}}></span>Qwen 3.6 27B</span>
+                <span className="legend-item"><span className="dot" style={{background:'#5590D8',borderRadius:'50%',display:'inline-block',width:10,height:10}}></span>Qwen 3.6 35B</span>
               </div>
             </div>
           </div>
           <div className="drift-panel">
-            <h3 className="chart-title">VLM Calibration Error Over Procedural Complexity</h3>
-            <p className="chart-subtitle">Average AUC across models — illustrative benchmark target</p>
+            <h3 className="chart-title">Top-K Accuracy — Procedure Classification</h3>
+            <p className="chart-subtitle">Cumulative accuracy at k=1–5 for procedure classification (1,122 clips)</p>
             <div id="line-chart" ref={lineChartRef}></div>
           </div>
         </div>
@@ -586,36 +553,36 @@ export default function LandingPage() {
               <div className="timeline-dot"></div>
               <div className="timeline-year">Phase 1</div>
               <div className="timeline-content">
-                <h4>Dataset Preparation &amp; Baseline Benchmarking</h4>
-                <p>Preprocessing NurViD and AIxSuture datasets and establishing standardized benchmarking pipelines for all selected VLMs under identical prompt and evaluation conditions.</p>
-                <div className="timeline-tags"><span>NurViD</span><span>AIxSuture</span><span>Preprocessing</span></div>
+                <h4>Dataset Preparation &amp; Tier 1 Benchmarking</h4>
+                <p>Preprocessing NurViD (1,538 nursing videos, 51 procedures, 177 action steps) and AIxSuture (314 suturing videos with OSATS ratings). Running Tier 1 core capability tasks — procedure identification, action step recognition, joint classification, and skill quality assessment — across all VLMs under identical conditions.</p>
+                <div className="timeline-tags"><span>NurViD</span><span>AIxSuture</span><span>Core Capability</span></div>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-year">Phase 2</div>
               <div className="timeline-content">
-                <h4>Two-Tier Benchmark Evaluation</h4>
-                <p>Tier 1 evaluates core capability tasks — procedure recognition, action classification, and skill assessment. Tier 2 evaluates procedural reasoning: temporal ordering, missing step detection, and rubric-based reasoning.</p>
-                <div className="timeline-tags"><span>Core Capability</span><span>Procedural Reasoning</span><span>VLM Evaluation</span></div>
+                <h4>Procedural Reasoning &amp; Hallucination Analysis</h4>
+                <p>Tier 2 evaluates higher-order reasoning — temporal ordering of shuffled clips, missing action detection, and rubric-grounded surgical assessment. Tier 3 characterizes hallucination subtypes (procedural, object, anatomical, sequential) and classifies VLM errors by clinical risk level: critical, major, minor, or no error.</p>
+                <div className="timeline-tags"><span>Procedural Reasoning</span><span>Hallucination</span><span>Clinical Risk</span></div>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-year">Phase 3</div>
               <div className="timeline-content">
-                <h4>Hallucination &amp; Clinical Safety Analysis</h4>
-                <p>Clinician-reviewed probe questions and contradiction testing against verified procedural annotations to identify failure modes, characterize hallucination patterns, and assess deployment readiness.</p>
-                <div className="timeline-tags"><span>Hallucination</span><span>Safety</span><span>Failure Modes</span></div>
+                <h4>Real-World Generalization at SHN</h4>
+                <p>Collecting 20–30 videos from Scarborough Health Network's skills lab to evaluate all models on this out-of-distribution set. Quantifying the curated-vs-real performance gap to assess deployment readiness and identify where benchmark performance breaks down in authentic clinical environments.</p>
+                <div className="timeline-tags"><span>SHN</span><span>Out-of-Distribution</span><span>Generalization</span></div>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-year">Output</div>
               <div className="timeline-content">
-                <h4>Open-Source Framework &amp; Publications</h4>
-                <p>Reproducible evaluation codebase, peer-reviewed manuscripts, and open-source audit protocols to support future research on VLM safety and reliability in healthcare education and clinical assessment.</p>
-                <div className="timeline-tags"><span>Open Source</span><span>Publication</span><span>Audit Framework</span></div>
+                <h4>Open-Source Audit Framework &amp; Publications</h4>
+                <p>A reusable evaluation codebase that any developer can use to test a clinical VLM before deployment — moving the field from "which model is best?" to "which capabilities are missing for real-world use?" Accompanied by peer-reviewed publications and open-access protocols.</p>
+                <div className="timeline-tags"><span>Open Source</span><span>Audit Framework</span><span>Publication</span></div>
               </div>
             </div>
           </div>
@@ -667,7 +634,7 @@ export default function LandingPage() {
           </div>
           <div className="pub-list">
             {[
-              { year: 2026, title: 'Benchmarking VLM Reliability in Healthcare: A Comprehensive Audit Framework for Procedural Clinical Video Understanding', authors: 'Grover S, Landy J, et al.', venue: 'Scarborough Health Network Research Institute · In Preparation', tags: ['VLM', 'Benchmarking', 'Clinical Safety'] },
+              { year: 2026, title: 'Benchmarking Vision-Language Models for Clinical Procedural Video Evaluation: Performance, Clinical Risk, and Hallucination in Nursing and Surgical Skill Assessment', authors: 'Grover S, Landy J, et al.', venue: 'Scarborough Health Network Research Institute · In Preparation', tags: ['VLM', 'Hallucination', 'Clinical Risk', 'NurViD', 'AIxSuture'] },
             ].map((pub, i) => (
               <div className="pub-item" key={i}>
                 <div className="pub-year">{pub.year}</div>

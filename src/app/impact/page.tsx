@@ -164,36 +164,36 @@ export default function ImpactPage() {
               <div className="timeline-dot"></div>
               <div className="timeline-year">Phase 1</div>
               <div className="timeline-content">
-                <h4>Dataset Preparation &amp; Baseline Benchmarking</h4>
-                <p>Preprocessing NurViD and AIxSuture datasets and establishing standardized benchmarking pipelines for all selected VLMs under identical prompt and evaluation conditions.</p>
-                <div className="timeline-tags"><span>NurViD</span><span>AIxSuture</span><span>Preprocessing</span></div>
+                <h4>Dataset Preparation &amp; Tier 1 Benchmarking</h4>
+                <p>Preprocessing NurViD (1,538 nursing videos, 51 procedures, 177 action steps) and AIxSuture (314 suturing videos with OSATS ratings). Running Tier 1 core capability tasks — procedure identification, action step recognition, joint classification, and skill quality assessment — across all VLMs under identical conditions.</p>
+                <div className="timeline-tags"><span>NurViD</span><span>AIxSuture</span><span>Core Capability</span></div>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-year">Phase 2</div>
               <div className="timeline-content">
-                <h4>Two-Tier Benchmark Evaluation</h4>
-                <p>Tier 1 evaluates core capability tasks — procedure recognition, action classification, and skill assessment. Tier 2 evaluates procedural reasoning: temporal ordering, missing step detection, and rubric-based reasoning.</p>
-                <div className="timeline-tags"><span>Core Capability</span><span>Procedural Reasoning</span><span>VLM Evaluation</span></div>
+                <h4>Procedural Reasoning &amp; Hallucination Analysis</h4>
+                <p>Tier 2 evaluates higher-order reasoning — temporal ordering of shuffled clips, missing action detection, and rubric-grounded surgical assessment. Tier 3 characterizes hallucination subtypes (procedural, object, anatomical, sequential) and classifies VLM errors by clinical risk level: critical, major, minor, or no error.</p>
+                <div className="timeline-tags"><span>Procedural Reasoning</span><span>Hallucination</span><span>Clinical Risk</span></div>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-year">Phase 3</div>
               <div className="timeline-content">
-                <h4>Hallucination &amp; Clinical Safety Analysis</h4>
-                <p>Clinician-reviewed probe questions and contradiction testing against verified procedural annotations to identify failure modes, characterize hallucination patterns, and assess deployment readiness.</p>
-                <div className="timeline-tags"><span>Hallucination</span><span>Safety</span><span>Failure Modes</span></div>
+                <h4>Real-World Generalization at SHN</h4>
+                <p>Collecting 20–30 videos from Scarborough Health Network's skills lab to evaluate all models on this out-of-distribution set. Quantifying the curated-vs-real performance gap to assess deployment readiness and identify where benchmark performance breaks down in authentic clinical environments.</p>
+                <div className="timeline-tags"><span>SHN</span><span>Out-of-Distribution</span><span>Generalization</span></div>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-year">Output</div>
               <div className="timeline-content">
-                <h4>Open-Source Framework &amp; Publications</h4>
-                <p>Reproducible evaluation codebase, peer-reviewed manuscripts, and open-source audit protocols to support future research on VLM safety and reliability in healthcare education and clinical assessment.</p>
-                <div className="timeline-tags"><span>Open Source</span><span>Publication</span><span>Audit Framework</span></div>
+                <h4>Open-Source Audit Framework &amp; Publications</h4>
+                <p>A reusable evaluation codebase that any developer can use to test a clinical VLM before deployment — moving the field from "which model is best?" to "which capabilities are missing for real-world use?" Accompanied by peer-reviewed publications and open-access protocols.</p>
+                <div className="timeline-tags"><span>Open Source</span><span>Audit Framework</span><span>Publication</span></div>
               </div>
             </div>
           </div>

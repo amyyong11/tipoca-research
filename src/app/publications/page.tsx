@@ -23,10 +23,10 @@ export default function PublicationsPage() {
   const pubs = [
     {
       year: 2026,
-      title: 'Benchmarking VLM Reliability in Healthcare: A Comprehensive Audit Framework for Procedural Clinical Video Understanding',
+      title: 'Benchmarking Vision-Language Models for Clinical Procedural Video Evaluation: Performance, Clinical Risk, and Hallucination in Nursing and Surgical Skill Assessment',
       authors: 'Grover S, Landy J, et al.',
       venue: 'Scarborough Health Network Research Institute · In Preparation',
-      tags: ['VLM', 'Benchmarking', 'Clinical Safety'],
+      tags: ['VLM', 'Hallucination', 'Clinical Risk', 'NurViD', 'AIxSuture'],
     },
   ];
 
