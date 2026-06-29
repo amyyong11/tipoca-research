@@ -184,7 +184,7 @@ export default function FindingsPage() {
         <div className="section-header light">
           <span className="label">Current Study</span>
           <h2>Benchmarking VLM Reliability in Healthcare</h2>
-          <p className="section-desc">We evaluate 12+ VLMs — open-source, closed-source, and medically-specialized — on nursing procedural recognition (NurViD) and surgical skill assessment (AIxSuture), spanning perception, procedural reasoning, and hallucination detection.</p>
+          <p className="section-desc">We evaluate 12+ VLMs - open-source, closed-source, and medically-specialized - on nursing procedural recognition (NurViD) and surgical skill assessment (AIxSuture), spanning perception, procedural reasoning, and hallucination detection.</p>
         </div>
         <div className="findings-grid">
           <div className="stat-column" ref={statColRef}>
@@ -198,7 +198,7 @@ export default function FindingsPage() {
             </div>
             <div className="stat-card">
               <div className="stat-number">{counts[2]}<span>+</span></div>
-              <div className="stat-label">VLMs evaluated — open-source, proprietary frontier, and medically specialized models</div>
+              <div className="stat-label">VLMs evaluated - open-source, proprietary frontier, and medically specialized models</div>
             </div>
             <div className="stat-card">
               <div className="stat-number">{counts[3]}</div>
@@ -206,7 +206,7 @@ export default function FindingsPage() {
             </div>
           </div>
           <div className="chart-panel">
-            <h3 className="chart-title">Top-1 Accuracy by Task — NurViD</h3>
+            <h3 className="chart-title">Top-1 Accuracy by Task - NurViD</h3>
             <p className="chart-subtitle">Procedure, action step, and joint classification across 3 models</p>
             <div id="bar-chart" ref={barChartRef}></div>
             <div className="chart-legend">
@@ -217,7 +217,7 @@ export default function FindingsPage() {
           </div>
         </div>
         <div className="drift-panel">
-          <h3 className="chart-title">Top-K Accuracy — Procedure Classification</h3>
+          <h3 className="chart-title">Top-K Accuracy - Procedure Classification</h3>
           <p className="chart-subtitle">Cumulative accuracy at k=1–5 for procedure classification (1,122 clips)</p>
           <div id="line-chart" ref={lineChartRef}></div>
         </div>

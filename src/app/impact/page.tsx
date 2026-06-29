@@ -165,7 +165,7 @@ export default function ImpactPage() {
               <div className="timeline-year">Phase 1</div>
               <div className="timeline-content">
                 <h4>Dataset Preparation &amp; Tier 1 Benchmarking</h4>
-                <p>Preprocessing NurViD (1,538 nursing videos, 51 procedures, 177 action steps) and AIxSuture (314 suturing videos with OSATS ratings). Running Tier 1 core capability tasks — procedure identification, action step recognition, joint classification, and skill quality assessment — across all VLMs under identical conditions.</p>
+                <p>Preprocessing NurViD (1,538 nursing videos, 51 procedures, 177 action steps) and AIxSuture (314 suturing videos with OSATS ratings). Running Tier 1 core capability tasks - procedure identification, action step recognition, joint classification, and skill quality assessment - across all VLMs under identical conditions.</p>
                 <div className="timeline-tags"><span>NurViD</span><span>AIxSuture</span><span>Core Capability</span></div>
               </div>
             </div>
@@ -174,7 +174,7 @@ export default function ImpactPage() {
               <div className="timeline-year">Phase 2</div>
               <div className="timeline-content">
                 <h4>Procedural Reasoning &amp; Hallucination Analysis</h4>
-                <p>Tier 2 evaluates higher-order reasoning — temporal ordering of shuffled clips, missing action detection, and rubric-grounded surgical assessment. Tier 3 characterizes hallucination subtypes (procedural, object, anatomical, sequential) and classifies VLM errors by clinical risk level: critical, major, minor, or no error.</p>
+                <p>Tier 2 evaluates higher-order reasoning - temporal ordering of shuffled clips, missing action detection, and rubric-grounded surgical assessment. Tier 3 characterizes hallucination subtypes (procedural, object, anatomical, sequential) and classifies VLM errors by clinical risk level: critical, major, minor, or no error.</p>
                 <div className="timeline-tags"><span>Procedural Reasoning</span><span>Hallucination</span><span>Clinical Risk</span></div>
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function ImpactPage() {
               <div className="timeline-year">Output</div>
               <div className="timeline-content">
                 <h4>Open-Source Audit Framework &amp; Publications</h4>
-                <p>A reusable evaluation codebase that any developer can use to test a clinical VLM before deployment — moving the field from "which model is best?" to "which capabilities are missing for real-world use?" Accompanied by peer-reviewed publications and open-access protocols.</p>
+                <p>A reusable evaluation codebase that any developer can use to test a clinical VLM before deployment - moving the field from "which model is best?" to "which capabilities are missing for real-world use?" Accompanied by peer-reviewed publications and open-access protocols.</p>
                 <div className="timeline-tags"><span>Open Source</span><span>Audit Framework</span><span>Publication</span></div>
               </div>
             </div>

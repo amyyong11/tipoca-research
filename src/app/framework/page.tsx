@@ -121,7 +121,7 @@ export default function FrameworkPage() {
             <div className="pillar" data-index="2">
               <div className="pillar-num">03</div>
               <h4>Patient Outcomes</h4>
-              <p>Direct measurement of patient safety metrics, care quality, and experience — not proxy metrics.</p>
+              <p>Direct measurement of patient safety metrics, care quality, and experience - not proxy metrics.</p>
             </div>
             <div className="pillar" data-index="3">
               <div className="pillar-num">04</div>

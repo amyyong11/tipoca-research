@@ -323,7 +323,7 @@ export const AntiGravityCanvas: React.FC = () => {
     return () => cancelAnimationFrame(frameIdRef.current);
   }, [animate]);
 
-  // Mouse Handlers — listen on window so overlay DOM elements don't block events
+  // Mouse Handlers - listen on window so overlay DOM elements don't block events
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       if (!containerRef.current) return;

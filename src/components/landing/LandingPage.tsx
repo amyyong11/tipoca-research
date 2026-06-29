@@ -408,7 +408,7 @@ export default function LandingPage() {
           <img src={`${BASE}/images/logo-dark.png`} alt="TIPOCA" className="hero-logo" />
           <p className="hero-eyebrow">Research Initiative</p>
           <h1 className="hero-title-metallic">Operationalizing<br /><span className="accent">AI in Healthcare</span></h1>
-          <p className="hero-sub">We audit vision-language models on clinical procedural video understanding — benchmarking performance, hallucination, and clinical risk across nursing procedures and surgical skill assessment to determine readiness for real-world deployment.</p>
+          <p className="hero-sub">We audit vision-language models on clinical procedural video understanding - benchmarking performance, hallucination, and clinical risk across nursing procedures and surgical skill assessment to determine readiness for real-world deployment.</p>
           <div className="hero-cta">
             <a href="#findings" className="btn-primary">Explore Findings</a>
             <a href="#publications" className="btn-ghost">Publications</a>
@@ -426,13 +426,13 @@ export default function LandingPage() {
           <div className="section-header">
             <span className="label">About the Project</span>
             <h2>Why Supporting Research Matters</h2>
-            <p className="section-desc">Deploying AI in clinical settings is not merely a technical problem. It demands rigorous evaluation of safety, fairness, workflow integration, and trust — the infrastructure that makes AI work <em>for</em> patients and clinicians.</p>
+            <p className="section-desc">Deploying AI in clinical settings is not merely a technical problem. It demands rigorous evaluation of safety, fairness, workflow integration, and trust - the infrastructure that makes AI work <em>for</em> patients and clinicians.</p>
           </div>
           <div className="about-grid">
             <div className="about-card">
               <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 1 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg></div>
               <h3>Four-Tier Evaluation</h3>
-              <p>We assess VLMs across perception and classification (Tier 1), procedural reasoning (Tier 2), clinical risk and hallucination (Tier 3), and real-world SHN deployment (Tier 4) — moving beyond simple accuracy benchmarks.</p>
+              <p>We assess VLMs across perception and classification (Tier 1), procedural reasoning (Tier 2), clinical risk and hallucination (Tier 3), and real-world SHN deployment (Tier 4) - moving beyond simple accuracy benchmarks.</p>
             </div>
             <div className="about-card">
               <div className="card-icon cyan"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
@@ -442,12 +442,12 @@ export default function LandingPage() {
             <div className="about-card">
               <div className="card-icon navy"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
               <h3>Hallucination &amp; Clinical Risk</h3>
-              <p>We measure procedural, object, anatomical, and sequential hallucinations — and classify VLM errors by clinical risk level (critical, major, minor) to surface the failure modes most dangerous for patient safety.</p>
+              <p>We measure procedural, object, anatomical, and sequential hallucinations - and classify VLM errors by clinical risk level (critical, major, minor) to surface the failure modes most dangerous for patient safety.</p>
             </div>
             <div className="about-card">
               <div className="card-icon cyan"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
               <h3>Reusable Audit Framework</h3>
-              <p>Rather than asking "which model is best?", our framework defines the capability gaps required for deployment — providing a reusable standard any developer can use to test their clinical VLM before release.</p>
+              <p>Rather than asking "which model is best?", our framework defines the capability gaps required for deployment - providing a reusable standard any developer can use to test their clinical VLM before release.</p>
             </div>
           </div>
         </div>
@@ -459,7 +459,7 @@ export default function LandingPage() {
           <div className="section-header light">
             <span className="label">Current Study</span>
             <h2>Benchmarking VLM Reliability in Healthcare</h2>
-            <p className="section-desc">We evaluate 12+ VLMs — open-source, closed-source, and medically-specialized — on nursing procedural recognition (NurViD) and surgical skill assessment (AIxSuture), spanning perception, procedural reasoning, and hallucination detection.</p>
+            <p className="section-desc">We evaluate 12+ VLMs - open-source, closed-source, and medically-specialized - on nursing procedural recognition (NurViD) and surgical skill assessment (AIxSuture), spanning perception, procedural reasoning, and hallucination detection.</p>
           </div>
           <div className="findings-grid">
             <div className="stat-column">
@@ -473,7 +473,7 @@ export default function LandingPage() {
               </div>
               <div className="stat-card">
                 <div className="stat-number">12<span>+</span></div>
-                <div className="stat-label">VLMs evaluated — open-source, proprietary frontier, and medically specialized models</div>
+                <div className="stat-label">VLMs evaluated - open-source, proprietary frontier, and medically specialized models</div>
               </div>
               <div className="stat-card">
                 <div className="stat-number">4</div>
@@ -481,7 +481,7 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="chart-panel">
-              <h3 className="chart-title">Top-1 Accuracy by Task — NurViD</h3>
+              <h3 className="chart-title">Top-1 Accuracy by Task - NurViD</h3>
               <p className="chart-subtitle">Procedure, action step, and joint classification across 3 models</p>
               <div id="bar-chart" ref={barChartRef}></div>
               <div className="chart-legend">
@@ -492,7 +492,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="drift-panel">
-            <h3 className="chart-title">Top-K Accuracy — Procedure Classification</h3>
+            <h3 className="chart-title">Top-K Accuracy - Procedure Classification</h3>
             <p className="chart-subtitle">Cumulative accuracy at k=1–5 for procedure classification (1,122 clips)</p>
             <div id="line-chart" ref={lineChartRef}></div>
           </div>
@@ -523,7 +523,7 @@ export default function LandingPage() {
               <div className="pillar" data-index="2">
                 <div className="pillar-num">03</div>
                 <h4>Patient Outcomes</h4>
-                <p>Direct measurement of patient safety metrics, care quality, and experience — not proxy metrics.</p>
+                <p>Direct measurement of patient safety metrics, care quality, and experience - not proxy metrics.</p>
               </div>
               <div className="pillar" data-index="3">
                 <div className="pillar-num">04</div>
@@ -554,7 +554,7 @@ export default function LandingPage() {
               <div className="timeline-year">Phase 1</div>
               <div className="timeline-content">
                 <h4>Dataset Preparation &amp; Tier 1 Benchmarking</h4>
-                <p>Preprocessing NurViD (1,538 nursing videos, 51 procedures, 177 action steps) and AIxSuture (314 suturing videos with OSATS ratings). Running Tier 1 core capability tasks — procedure identification, action step recognition, joint classification, and skill quality assessment — across all VLMs under identical conditions.</p>
+                <p>Preprocessing NurViD (1,538 nursing videos, 51 procedures, 177 action steps) and AIxSuture (314 suturing videos with OSATS ratings). Running Tier 1 core capability tasks - procedure identification, action step recognition, joint classification, and skill quality assessment - across all VLMs under identical conditions.</p>
                 <div className="timeline-tags"><span>NurViD</span><span>AIxSuture</span><span>Core Capability</span></div>
               </div>
             </div>
@@ -563,7 +563,7 @@ export default function LandingPage() {
               <div className="timeline-year">Phase 2</div>
               <div className="timeline-content">
                 <h4>Procedural Reasoning &amp; Hallucination Analysis</h4>
-                <p>Tier 2 evaluates higher-order reasoning — temporal ordering of shuffled clips, missing action detection, and rubric-grounded surgical assessment. Tier 3 characterizes hallucination subtypes (procedural, object, anatomical, sequential) and classifies VLM errors by clinical risk level: critical, major, minor, or no error.</p>
+                <p>Tier 2 evaluates higher-order reasoning - temporal ordering of shuffled clips, missing action detection, and rubric-grounded surgical assessment. Tier 3 characterizes hallucination subtypes (procedural, object, anatomical, sequential) and classifies VLM errors by clinical risk level: critical, major, minor, or no error.</p>
                 <div className="timeline-tags"><span>Procedural Reasoning</span><span>Hallucination</span><span>Clinical Risk</span></div>
               </div>
             </div>
@@ -581,7 +581,7 @@ export default function LandingPage() {
               <div className="timeline-year">Output</div>
               <div className="timeline-content">
                 <h4>Open-Source Audit Framework &amp; Publications</h4>
-                <p>A reusable evaluation codebase that any developer can use to test a clinical VLM before deployment — moving the field from "which model is best?" to "which capabilities are missing for real-world use?" Accompanied by peer-reviewed publications and open-access protocols.</p>
+                <p>A reusable evaluation codebase that any developer can use to test a clinical VLM before deployment - moving the field from "which model is best?" to "which capabilities are missing for real-world use?" Accompanied by peer-reviewed publications and open-access protocols.</p>
                 <div className="timeline-tags"><span>Open Source</span><span>Audit Framework</span><span>Publication</span></div>
               </div>
             </div>

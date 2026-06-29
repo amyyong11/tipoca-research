@@ -5,7 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "TIPOCA — Operationalizing AI in Healthcare",
+  title: "TIPOCA: Operationalizing AI in Healthcare",
   description: "TIPOCA Research Initiative",
 };
 

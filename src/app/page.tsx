@@ -12,7 +12,7 @@ export default function Home() {
         <img src={`${BASE}/images/logo-dark.png`} alt="TIPOCA" className="hero-logo" />
         <p className="hero-eyebrow">Research Initiative</p>
         <h1 className="hero-title-metallic">Operationalizing<br /><span className="accent">AI in Healthcare</span></h1>
-        <p className="hero-sub">We audit vision-language models on clinical procedural video understanding — benchmarking performance, hallucination, and clinical risk across nursing procedures and surgical skill assessment to determine readiness for real-world deployment.</p>
+        <p className="hero-sub">We audit vision-language models on clinical procedural video understanding - benchmarking performance, hallucination, and clinical risk across nursing procedures and surgical skill assessment to determine readiness for real-world deployment.</p>
         <div className="hero-cta">
           <Link href="/findings" className="btn-primary">Explore Findings</Link>
           <Link href="/publications" className="btn-ghost">Publications</Link>
