@@ -155,6 +155,7 @@ export default function ImpactPage() {
       <section id="impact" className="section-dark">
         <div className="container">
           <div className="section-header light">
+            <div className="section-numeral">04</div>
             <span className="label">Study Phases</span>
             <h2>Research Roadmap</h2>
             <p className="section-desc">The study is conducted in three phases, from dataset preparation and baseline benchmarking through to hallucination analysis and deployment readiness assessment.</p>

@@ -101,6 +101,7 @@ export default function FrameworkPage() {
     <section id="framework" className="section-light">
       <div className="container">
         <div className="section-header">
+          <div className="section-numeral">03</div>
           <span className="label">The TIPOCA Framework</span>
           <h2>A Five-Pillar Approach to AI Operationalization</h2>
           <p className="section-desc">Based on our findings, we developed a structured framework that healthcare organizations can use to evaluate, deploy, and monitor AI systems responsibly.</p>

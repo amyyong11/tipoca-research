@@ -29,6 +29,7 @@ export default function TeamPage() {
     <section id="team" className="section-dark">
       <div className="container">
         <div className="section-header light">
+          <div className="section-numeral">05</div>
           <span className="label">Our Team</span>
           <h2>Researchers &amp; Collaborators</h2>
         </div>

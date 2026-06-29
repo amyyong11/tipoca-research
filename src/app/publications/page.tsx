@@ -34,6 +34,7 @@ export default function PublicationsPage() {
     <section id="publications" className="section-light">
       <div className="container">
         <div className="section-header">
+          <div className="section-numeral">06</div>
           <span className="label">Publications</span>
           <h2>Selected Research Output</h2>
         </div>
