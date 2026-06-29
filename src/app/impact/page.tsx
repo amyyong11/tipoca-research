@@ -155,10 +155,14 @@ export default function ImpactPage() {
       <section id="impact" className="section-dark">
         <div className="container">
           <div className="section-header light">
-            <div className="section-numeral">04</div>
-            <span className="label">Study Phases</span>
-            <h2>Research Roadmap</h2>
-            <p className="section-desc">The study is conducted in three phases, from dataset preparation and baseline benchmarking through to hallucination analysis and deployment readiness assessment.</p>
+            <div className="section-header-left">
+              <div className="section-numeral">04</div>
+              <span className="label">Study Phases</span>
+            </div>
+            <div className="section-header-text">
+              <h2>Research Roadmap</h2>
+              <p className="section-desc">The study is conducted in three phases, from dataset preparation and baseline benchmarking through to hallucination analysis and deployment readiness assessment.</p>
+            </div>
           </div>
           <div className="impact-timeline" id="impact-timeline">
             <div className="timeline-item active">
@@ -204,9 +208,11 @@ export default function ImpactPage() {
       <section id="network-section" className="section-light">
         <div className="container">
           <div className="section-header">
-            <span className="label">Research Connections</span>
-            <h2>Interdisciplinary Knowledge Graph</h2>
-            <p className="section-desc">Our work sits at the intersection of ML, clinical informatics, ethics, and health policy. Drag nodes to explore relationships.</p>
+            <div className="section-header-text">
+              <span className="label">Research Connections</span>
+              <h2>Interdisciplinary Knowledge Graph</h2>
+              <p className="section-desc">Our work sits at the intersection of ML, clinical informatics, ethics, and health policy. Drag nodes to explore relationships.</p>
+            </div>
           </div>
           <div id="network-chart" ref={networkRef}></div>
         </div>

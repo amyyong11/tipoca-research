@@ -29,10 +29,14 @@ export default function AboutPage() {
     <section id="about" className="section-light">
       <div className="container">
         <div className="section-header">
-          <div className="section-numeral">01</div>
-          <span className="label">About the Project</span>
-          <h2>Why Supporting Research Matters</h2>
-          <p className="section-desc">Deploying AI in clinical settings is not merely a technical problem. It demands rigorous evaluation of safety, fairness, workflow integration, and trust - the infrastructure that makes AI work <em>for</em> patients and clinicians.</p>
+          <div className="section-header-left">
+            <div className="section-numeral">01</div>
+            <span className="label">About the Project</span>
+          </div>
+          <div className="section-header-text">
+            <h2>Why Supporting Research Matters</h2>
+            <p className="section-desc">Deploying AI in clinical settings is not merely a technical problem. It demands rigorous evaluation of safety, fairness, workflow integration, and trust - the infrastructure that makes AI work <em>for</em> patients and clinicians.</p>
+          </div>
         </div>
         <div className="about-grid">
           <div className="about-card">

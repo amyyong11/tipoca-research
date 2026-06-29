@@ -34,9 +34,13 @@ export default function PublicationsPage() {
     <section id="publications" className="section-light">
       <div className="container">
         <div className="section-header">
-          <div className="section-numeral">06</div>
-          <span className="label">Publications</span>
-          <h2>Selected Research Output</h2>
+          <div className="section-header-left">
+            <div className="section-numeral">06</div>
+            <span className="label">Publications</span>
+          </div>
+          <div className="section-header-text">
+            <h2>Selected Research Output</h2>
+          </div>
         </div>
         <div className="pub-list">
           {pubs.map((pub, i) => (

@@ -29,9 +29,13 @@ export default function TeamPage() {
     <section id="team" className="section-dark">
       <div className="container">
         <div className="section-header light">
-          <div className="section-numeral">05</div>
-          <span className="label">Our Team</span>
-          <h2>Researchers &amp; Collaborators</h2>
+          <div className="section-header-left">
+            <div className="section-numeral">05</div>
+            <span className="label">Our Team</span>
+          </div>
+          <div className="section-header-text">
+            <h2>Researchers &amp; Collaborators</h2>
+          </div>
         </div>
         <div className="team-grid">
           <div className="team-card">

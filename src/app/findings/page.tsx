@@ -182,10 +182,14 @@ export default function FindingsPage() {
     <section id="findings" className="section-dark">
       <div className="container">
         <div className="section-header light">
-          <div className="section-numeral">02</div>
-          <span className="label">Current Study</span>
-          <h2>Benchmarking VLM Reliability in Healthcare</h2>
-          <p className="section-desc">We evaluate 12+ VLMs - open-source, closed-source, and medically-specialized - on nursing procedural recognition (NurViD) and surgical skill assessment (AIxSuture), spanning perception, procedural reasoning, and hallucination detection.</p>
+          <div className="section-header-left">
+            <div className="section-numeral">02</div>
+            <span className="label">Current Study</span>
+          </div>
+          <div className="section-header-text">
+            <h2>Benchmarking VLM Reliability in Healthcare</h2>
+            <p className="section-desc">We evaluate 12+ VLMs - open-source, closed-source, and medically-specialized - on nursing procedural recognition (NurViD) and surgical skill assessment (AIxSuture), spanning perception, procedural reasoning, and hallucination detection.</p>
+          </div>
         </div>
         <div className="findings-grid">
           <div className="stat-column" ref={statColRef}>
