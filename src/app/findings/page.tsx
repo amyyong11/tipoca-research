@@ -1,10 +1,12 @@
 "use client";
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
 export default function FindingsPage() {
   const barChartRef = useRef<HTMLDivElement>(null);
   const lineChartRef = useRef<HTMLDivElement>(null);
+  const statColRef = useRef<HTMLDivElement>(null);
+  const [counts, setCounts] = useState([0, 0, 0, 0]);
 
   useEffect(() => {
     const container = barChartRef.current;
@@ -169,6 +171,25 @@ export default function FindingsPage() {
   }, []);
 
   useEffect(() => {
+    const targets = [1538, 314, 12, 2];
+    const duration = 1600;
+    const observer = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      observer.disconnect();
+      const start = performance.now();
+      const tick = (now: number) => {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        setCounts(targets.map(v => Math.round(v * ease)));
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.3 });
+    if (statColRef.current) observer.observe(statColRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `.in-view { opacity: 1 !important; transform: translateY(0) !important; }`;
     document.head.appendChild(style);
@@ -200,21 +221,21 @@ export default function FindingsPage() {
           <p className="section-desc">Evaluating multimodal vision-language models on procedural clinical video understanding — from nursing procedures to surgical skill assessment — across core capability and procedural reasoning tasks.</p>
         </div>
         <div className="findings-grid">
-          <div className="stat-column">
+          <div className="stat-column" ref={statColRef}>
             <div className="stat-card">
-              <div className="stat-number">1,538</div>
+              <div className="stat-number">{counts[0].toLocaleString()}</div>
               <div className="stat-label">nursing procedural videos (144 hours) across 51 procedure categories in the NurViD dataset</div>
             </div>
             <div className="stat-card">
-              <div className="stat-number">314</div>
+              <div className="stat-number">{counts[1]}</div>
               <div className="stat-label">surgical suturing assessment videos (~26 hours) with expert OSATS skill ratings in AIxSuture</div>
             </div>
             <div className="stat-card">
-              <div className="stat-number">12<span>+</span></div>
+              <div className="stat-number">{counts[2]}<span>+</span></div>
               <div className="stat-label">VLMs evaluated — open-source, proprietary frontier, and medically specialized models</div>
             </div>
             <div className="stat-card">
-              <div className="stat-number">2</div>
+              <div className="stat-number">{counts[3]}</div>
               <div className="stat-label">evaluation tiers: core capability tasks and higher-level procedural reasoning assessments</div>
             </div>
           </div>

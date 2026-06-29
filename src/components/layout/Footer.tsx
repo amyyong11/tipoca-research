@@ -26,7 +26,7 @@ export default function Footer() {
             <span className="footer-dot">·</span>
             <a href="https://www.shn.ca/shn-research-institute/" target="_blank" rel="noopener noreferrer">SHN Research Institute</a>
           </div>
-          <p className="footer-copy">&copy; 2025 TIPOCA Research Lab. All rights reserved.</p>
+          <p className="footer-copy">&copy; 2026 TIPOCA Research Lab. All rights reserved.</p>
         </div>
       </div>
     </footer>

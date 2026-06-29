@@ -380,9 +380,17 @@ h4 { font-size: 1rem;    font-weight: 700; color: var(--white); }
 .stat-number {
   font-size: 2.6rem;
   font-weight: 900;
-  color: var(--cyan);
   line-height: 1;
   margin-bottom: 8px;
+  background: linear-gradient(
+    to right,
+    #1a6880 0%, #5BC8E8 14%, #a8e8f8 26%,
+    #2a90ae 38%, #5BC8E8 50%, #1a6880 62%,
+    #7dd8f0 74%, #2a90ae 86%, #5BC8E8 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .stat-number span { font-size: 1.6rem; }
 .stat-label { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; }
